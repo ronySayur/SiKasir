@@ -9,4 +9,7 @@ class classProduk {
     var merek: String? = null
     var foto: String? = null
     var stok: String? = null
+    var nama_Vendor: String? = null
+    var id_Produk: String? = null
+    var id_Toko: String? = null
 }

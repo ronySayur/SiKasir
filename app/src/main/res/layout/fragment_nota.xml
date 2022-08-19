@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".laporan.penjualan.fragment_Nota">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/view7"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
+                android:background="#838383"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+            <View
+                android:id="@+id/view8"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="#838383"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView76" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/amiko"
+                android:text=" Jl. Mayjen Sutoyo No.4 Kabupaten Bantul\nDaerah Istimewa Yogyakarta"
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:typeface="sans"
+                app:layout_constraintEnd_toEndOf="@+id/imageView7"
+                app:layout_constraintStart_toStartOf="@+id/imageView7"
+                app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/logoaida"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/view9"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="#838383"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView79" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_note"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view9"
+                tools:listitem="@layout/list_detail">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <View
+                android:id="@+id/view11"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="8dp"
+                android:background="#838383"
+                app:layout_constraintEnd_toEndOf="@+id/view8"
+                app:layout_constraintStart_toStartOf="@+id/textView79"
+                app:layout_constraintTop_toBottomOf="@+id/textView82" />
+
+            <View
+                android:id="@+id/view12"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginTop="8dp"
+                android:background="#838383"
+                app:layout_constraintEnd_toEndOf="@+id/view8"
+                app:layout_constraintStart_toStartOf="@+id/textView79"
+                app:layout_constraintTop_toBottomOf="@+id/textView84" />
+
+            <TextView
+                android:id="@+id/textView79"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="### SALINAN ###"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/view8"
+                app:layout_constraintStart_toStartOf="@+id/view8"
+                app:layout_constraintTop_toBottomOf="@+id/view8" />
+
+            <TextView
+                android:id="@+id/textView76"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/amiko"
+                android:lineSpacingExtra="10sp"
+                android:text="No Nota"
+                android:textSize="16sp"
+                android:typeface="serif"
+                app:layout_constraintStart_toStartOf="@+id/textView75"
+                app:layout_constraintTop_toBottomOf="@+id/textView75" />
+
+            <TextView
+                android:id="@+id/note_tanggal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/amiko"
+                android:lineSpacingExtra="10sp"
+                android:text="TextView"
+                android:textSize="16sp"
+                android:typeface="serif"
+                app:layout_constraintEnd_toEndOf="@+id/note_namap"
+                app:layout_constraintTop_toTopOf="@+id/textView75" />
+
+            <TextView
+                android:id="@+id/note_namap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/amiko"
+                android:lineSpacingExtra="10sp"
+                android:text="TextView"
+                android:textSize="16sp"
+                android:typeface="serif"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/note_jabatan" />
+
+            <TextView
+                android:id="@+id/note_jabatan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/amiko"
+                android:lineSpacingExtra="10sp"
+                android:text="Kasir"
+                android:textSize="16sp"
+                android:typeface="serif"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view7" />
+
+            <TextView
+                android:id="@+id/textView75"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/amiko"
+                android:lineSpacingExtra="10sp"
+                android:text="Waktu"
+                android:textSize="16sp"
+                android:typeface="serif"
+                app:layout_constraintStart_toStartOf="@+id/note_jabatan"
+                app:layout_constraintTop_toBottomOf="@+id/note_jabatan" />
+
+            <TextView
+                android:id="@+id/note_no_nota"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/amiko"
+                android:lineSpacingExtra="10sp"
+                android:text="TextView"
+                android:textSize="16sp"
+                android:typeface="serif"
+                app:layout_constraintEnd_toEndOf="@+id/note_tanggal"
+                app:layout_constraintTop_toTopOf="@+id/textView76" />
+
+            <TextView
+                android:id="@+id/textView80"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/amiko"
+                android:lineSpacingExtra="10sp"
+                android:text="Sub Total"
+                android:textSize="16sp"
+                android:typeface="serif"
+                app:layout_constraintStart_toStartOf="@+id/note_jabatan"
+                app:layout_constraintTop_toBottomOf="@+id/rv_note" />
+
+            <TextView
+                android:id="@+id/note_sub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/amiko"
+                android:lineSpacingExtra="10sp"
+                android:text="TextView"
+                android:textSize="16sp"
+                android:typeface="serif"
+                app:layout_constraintBottom_toBottomOf="@+id/textView80"
+                app:layout_constraintEnd_toEndOf="@+id/note_namap"
+                app:layout_constraintTop_toTopOf="@+id/textView80" />
+
+            <TextView
+                android:id="@+id/textView82"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/amiko"
+                android:lineSpacingExtra="10sp"
+                android:text="Diskon"
+                android:textSize="16sp"
+                android:typeface="serif"
+                app:layout_constraintStart_toStartOf="@+id/textView80"
+                app:layout_constraintTop_toBottomOf="@+id/textView80" />
+
+            <TextView
+                android:id="@+id/note_diskon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/amiko"
+                android:lineSpacingExtra="10sp"
+                android:text="TextView"
+                android:textSize="16sp"
+                android:typeface="serif"
+                app:layout_constraintBottom_toBottomOf="@+id/textView82"
+                app:layout_constraintEnd_toEndOf="@+id/note_sub"
+                app:layout_constraintTop_toTopOf="@+id/textView82" />
+
+            <TextView
+                android:id="@+id/textView84"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/amiko"
+                android:lineSpacingExtra="10sp"
+                android:text="Total"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:typeface="serif"
+                app:layout_constraintStart_toStartOf="@+id/textView80"
+                app:layout_constraintTop_toBottomOf="@id/view11" />
+
+            <TextView
+                android:id="@+id/note_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/amiko"
+                android:lineSpacingExtra="10sp"
+                android:text="TextView"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:typeface="serif"
+                app:layout_constraintBottom_toBottomOf="@+id/textView84"
+                app:layout_constraintEnd_toEndOf="@+id/note_sub"
+                app:layout_constraintTop_toTopOf="@+id/textView84" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

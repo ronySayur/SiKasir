@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D6D6D6"
-    tools:context=".transaksi.pembayaran.pembayaran">
+    tools:context=".penjualan.pembayaran.pembayaran">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout4"

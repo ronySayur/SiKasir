@@ -50,8 +50,7 @@
         android:inputType="date"
         android:minHeight="48dp"
         android:paddingLeft="8dp"
-        android:text="date"
-        android:visibility="gone"
+        android:text="Tanggal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -189,16 +188,52 @@
                     android:layout_height="match_parent">
 
                     <TextView
+                        android:id="@+id/totaltransaksi_judul2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/amiko_bold"
+                        android:text="Transaksi Pembelian"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/totaltransaksi_judul"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/totaltransaksi_nama2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:fontFamily="@font/amiko_bold"
+                        android:lineSpacingExtra="10sp"
+                        android:text="0"
+                        android:textAlignment="viewStart"
+                        android:textColor="#FF3D00"
+                        android:textSize="20sp"
+                        android:typeface="sans"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/totaltransaksi_judul2"
+                        app:layout_constraintTop_toBottomOf="@+id/totaltransaksi_judul" />
+
+                    <TextView
                         android:id="@+id/totaltransaksi_judul"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/amiko_bold"
-                        android:text="Total Transaksi"
+                        android:text="Transaksi Penjualan"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                         android:textColor="#000000"
                         android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@+id/totaltransaksi_judul2"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -212,6 +247,7 @@
                         android:lineSpacingExtra="10sp"
                         android:text="0"
                         android:textAlignment="viewStart"
+                        android:textColor="#00B0FF"
                         android:textSize="20sp"
                         android:typeface="sans"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -238,6 +274,23 @@
                     android:layout_height="match_parent">
 
                     <TextView
+                        android:id="@+id/tv_total_pem"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:fontFamily="@font/amiko_bold"
+                        android:lineSpacingExtra="10sp"
+                        android:text="0"
+                        android:textAlignment="viewStart"
+                        android:textColor="#FF3D00"
+                        android:textSize="20sp"
+                        android:typeface="sans"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/keuntungan_judul2"
+                        app:layout_constraintTop_toBottomOf="@+id/keuntungan_judul" />
+
+                    <TextView
                         android:id="@+id/keuntungan_judul"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -248,11 +301,30 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                         android:textColor="#000000"
                         android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@+id/keuntungan_judul2"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/keuntungan_nama"
+                        android:id="@+id/keuntungan_judul2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/amiko_bold"
+                        android:text="Total Pembelian"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="#000000"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/keuntungan_judul"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_total_pen"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -295,6 +367,7 @@
                         android:layout_width="0dp"
                         android:layout_height="200dp"
                         android:layout_marginTop="8dp"
+                        android:clickable="false"
                         app:layout_constraintEnd_toEndOf="@+id/transaksi_nama"
                         app:layout_constraintStart_toStartOf="@+id/transaksi_nama"
                         app:layout_constraintTop_toBottomOf="@+id/transaksi_nama"
@@ -323,7 +396,7 @@
                         android:layout_marginTop="16dp"
                         android:layout_marginEnd="16dp"
                         android:fontFamily="@font/amiko_bold"
-                        android:text="Transaksi Terakhir"
+                        android:text="Transaksi Penjualan"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                         android:textColor="#000000"
                         android:textStyle="bold"
@@ -345,6 +418,22 @@
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="@+id/transaksi_judul"
                         app:layout_constraintTop_toBottomOf="@+id/transaksi_judul" />
+
+                    <TextView
+                        android:id="@+id/textView23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/amiko_bold"
+                        android:text="Transaksi Kosong !"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="#FF3D00"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toTopOf="@+id/transaksi_detail"
+                        app:layout_constraintEnd_toEndOf="@+id/transaksi_nama"
+                        app:layout_constraintStart_toStartOf="@+id/transaksi_nama"
+                        app:layout_constraintTop_toBottomOf="@+id/transaksi_nama" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".transaksi.riwayat.riwayatTransaksi">
+    tools:context=".penjualan.riwayat.riwayatTransaksi">
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
@@ -125,7 +125,8 @@
             android:layout_gravity="start"
             android:background="@drawable/bg_nav_padrb"
             android:elevation="5dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/navigation_header_img"

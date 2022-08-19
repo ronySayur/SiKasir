@@ -12,26 +12,32 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.project.sikasir.R
 import com.project.sikasir.laporan.laporan
-import com.project.sikasir.transaksi.riwayat.adapterRiwayat
-import com.project.sikasir.transaksi.riwayat.classRiwayat
-import com.project.sikasir.transaksi.riwayat.riwayatTransaksi
+import com.project.sikasir.pembelian.classPembelian
+import com.project.sikasir.penjualan.pembayaran.classPenjualan
+import com.project.sikasir.penjualan.riwayat.adapterRiwayat
+import com.project.sikasir.penjualan.riwayat.classRiwayat
+import com.project.sikasir.penjualan.riwayat.riwayatTransaksi
 import kotlinx.android.synthetic.main.laporan_rangkuman.*
 import java.text.NumberFormat
 import java.util.*
 
 class laporanRangkuman : AppCompatActivity() {
-    val pList = ArrayList<classRiwayat>()
+    val cRiwayat = ArrayList<classRiwayat>()
+    val Rp = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
+    private lateinit var ssPenjualan: DataSnapshot
+    private lateinit var ssPembelian: DataSnapshot
+
+    private var awal = -1L
+    private var akhir = -1L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.laporan_rangkuman)
-
-        getRiwayat()
-
         tvA3toA3.setOnClickListener { startActivity(Intent(this, laporan::class.java)) }
         tvA3toA3.setOnClickListener { finish() }
         transaksi_detail.setOnClickListener { startActivity(Intent(this, riwayatTransaksi::class.java)) }
         editTextDate.setOnClickListener { tgl() }
+        getData()
     }
 
     private fun tgl() {
@@ -42,13 +48,12 @@ class laporanRangkuman : AppCompatActivity() {
         Toast.makeText(this, "tunggu sebentar", Toast.LENGTH_SHORT).show()
 
         datePicker.addOnPositiveButtonClickListener {
-            val awal = datePicker.selection!!.first
-            val akhir = datePicker.selection!!.second
+            awal = datePicker.selection!!.first
+            akhir = datePicker.selection!!.second
 
             editTextDate.setText(datePicker.headerText)
-
             editTextDate.isEnabled = true
-            Toast.makeText(this, datePicker.headerText, Toast.LENGTH_LONG).show()
+            initAdapter()
         }
 
         datePicker.addOnNegativeButtonClickListener {
@@ -60,40 +65,97 @@ class laporanRangkuman : AppCompatActivity() {
         }
     }
 
-    private fun getRiwayat() {
+    private fun getData() {
         rv_riwayat.layoutManager = GridLayoutManager(this, 1)
         rv_riwayat.setHasFixedSize(true)
 
-        val refProduk = FirebaseDatabase.getInstance().getReference("Transaksi")
+        val refPenjualan = FirebaseDatabase.getInstance().getReference("Penjualan").orderByValue()
+        val refPembelian = FirebaseDatabase.getInstance().getReference("Pembelian")
 
-        refProduk.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-
-                if (snapshot.exists()) {
-                    pList.clear()
-                    var tot = 0
-                    var i = 0
-                    for (snap in snapshot.children) {
-                        i += 1
-                        val t = snap.getValue(classRiwayat::class.java)
-
-                        if (snap.child("total").exists()) {
-                            tot += Integer.parseInt(snap.child("total").getValue(String::class.java)!!.replace(",00", "").replace(".", "").replace("Rp ", ""))
+        refPembelian.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshotPembelian: DataSnapshot) {
+                if (snapshotPembelian.exists()) {
+                    refPenjualan.addValueEventListener(object : ValueEventListener {
+                        override fun onDataChange(snapshotPenjualan: DataSnapshot) {
+                            if (snapshotPenjualan.exists()) {
+                                ssPembelian = snapshotPembelian
+                                ssPenjualan = snapshotPenjualan
+                                initAdapter()
+                            }
                         }
 
-                        val totalString = NumberFormat.getCurrencyInstance(Locale("in", "ID")).format(tot)
-                        val total = totalString.substring(0, 2) + " " + totalString.substring(2, totalString.length)
-
-                        keuntungan_nama.text = total
-
-                        pList.add(t!!)
-                    }
-                    totaltransaksi_nama.text = i.toString() + " Transaksi"
-                    rv_riwayat.adapter = adapterRiwayat(pList)
+                        override fun onCancelled(error: DatabaseError) {}
+                    })
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {}
         })
+    }
+
+    private fun initAdapter() {
+        if (this::ssPenjualan.isInitialized && this::ssPembelian.isInitialized) {
+            var JTPenjualan = 0
+            var JTPPembelian = 0
+            var TTPenjualan = 0
+            var TTPembelian = 0
+            cRiwayat.clear()
+
+            if (awal == -1L && akhir == -1L) {
+                for (snapBeli in ssPembelian.children) {
+                    val t = snapBeli.getValue(classPembelian::class.java)
+                    JTPPembelian += 1
+                    TTPembelian += t?.totalPembelian?.replace(",00", "")?.filter { it.isDigit() }?.toInt()!!
+                }
+                for (snapTransaksi in ssPenjualan.children) {
+                    val t = snapTransaksi.getValue(classPenjualan::class.java)
+                    JTPenjualan += 1
+                    TTPenjualan += t?.total?.replace(",00", "")?.filter { it.isDigit() }?.toInt()!!
+                }
+            } else {
+                for (snapTransaksi in ssPenjualan.children) {
+                    val t = snapTransaksi.getValue(classPenjualan::class.java)
+                    if (t?.tanggal!! >= awal && t.tanggal!! <= akhir) {
+                        JTPenjualan += 1
+                        TTPenjualan += t.total?.replace(",00", "")?.filter { it.isDigit() }?.toInt()!!
+                    }
+                }
+                for (snapBeli in ssPembelian.children) {
+                    val t = snapBeli.getValue(classPembelian::class.java)
+                    if (t?.tglLong!! >= awal && t.tglLong!! <= akhir) {
+                        JTPPembelian += 1
+                        TTPembelian += t.totalPembelian?.replace(",00", "")?.filter { it.isDigit() }?.toInt()!!
+                    }
+                }
+            }
+
+            val TPenjualan = Rp.format(TTPenjualan)
+            val TPEN = TPenjualan.substring(0, 2) + " " + TPenjualan.substring(2, TPenjualan.length)
+            val TPembelian = Rp.format(TTPembelian)
+            val TPEM = TPembelian.substring(0, 2) + " " + TPembelian.substring(2, TPembelian.length)
+
+            tv_total_pen.text = TPEN
+            tv_total_pem.text = TPEM
+            ("$JTPenjualan Transaksi").also { totaltransaksi_nama.text = it }
+            ("$JTPPembelian Transaksi").also { totaltransaksi_nama2.text = it }
+
+            for (snapPembelian in ssPembelian.children) {
+                if (awal == -1L && akhir == -1L) {
+                    for (snapTransaksi in ssPenjualan.children) {
+                        val t = snapTransaksi.getValue(classRiwayat::class.java)
+                        cRiwayat.add(t!!)
+                    }
+                } else {
+                    for (snapTransaksi in ssPenjualan.children) {
+                        val t = snapTransaksi.getValue(classRiwayat::class.java)
+                        if (t?.tanggal!! >= awal && t.tanggal!! <= akhir) {
+                            cRiwayat.add(t)
+                        }
+                    }
+                }
+            }
+
+            rv_riwayat.adapter = adapterRiwayat(cRiwayat)
+        }
     }
 }

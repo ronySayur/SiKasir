@@ -42,6 +42,119 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout13">
 
+                <TextView
+                    android:id="@+id/textView27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Toko"
+                    android:textSize="16sp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/rv_spinT"
+                    app:layout_constraintStart_toStartOf="@+id/edNamaProduk"
+                    app:layout_constraintTop_toTopOf="@+id/rv_spinT" />
+
+                <TextView
+                    android:id="@+id/textView90"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Supplier"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/rv_spin"
+                    app:layout_constraintStart_toStartOf="@+id/edNamaProduk"
+                    app:layout_constraintTop_toTopOf="@+id/rv_spin" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/rv_spinT"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight=".28"
+                    android:background="@drawable/spinnertheme"
+                    android:orientation="horizontal"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@+id/rv_spin"
+                    app:layout_constraintStart_toStartOf="@+id/rv_spin"
+                    app:layout_constraintTop_toBottomOf="@+id/edStok">
+
+                    <Spinner
+                        android:id="@+id/spinT"
+                        style="@style/AppTheme.PopupOverlay"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:entries="@array/Jabatan"
+                        android:minHeight="48dp"
+                        android:scrollIndicators="right"
+                        android:spinnerMode="dropdown"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView11T"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView11T"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/rv_spin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_weight=".28"
+                    android:background="@drawable/spinnertheme"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/edNamaProduk"
+                    app:layout_constraintStart_toEndOf="@+id/textView90"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_spinT">
+
+                    <Spinner
+                        android:id="@+id/spinKategori"
+                        style="@style/AppTheme.PopupOverlay"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:entries="@array/Jabatan"
+                        android:minHeight="48dp"
+                        android:scrollIndicators="right"
+                        android:spinnerMode="dropdown"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView11"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <EditText
                     android:id="@+id/edNamaProduk"
                     android:layout_width="0dp"
@@ -74,6 +187,22 @@
                     app:layout_constraintTop_toBottomOf="@+id/edNamaProduk"
                     app:localeTag="ID" />
 
+                <com.cottacush.android.currencyedittext.CurrencyEditText
+                    android:id="@+id/edHargaModal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:ems="10"
+                    android:hint="Harga Modal"
+                    android:inputType="number"
+                    android:minHeight="48dp"
+                    android:windowSoftInputMode="adjustPan"
+                    app:currencySymbol="Rp"
+                    app:layout_constraintEnd_toEndOf="@+id/edHargaJual"
+                    app:layout_constraintStart_toStartOf="@+id/edHargaJual"
+                    app:layout_constraintTop_toBottomOf="@+id/edHargaJual"
+                    app:localeTag="ID" />
+
                 <EditText
                     android:id="@+id/edMerek"
                     android:layout_width="0dp"
@@ -87,7 +216,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/edHargaJual"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/edHargaJual"
-                    app:layout_constraintTop_toBottomOf="@+id/edHargaJual" />
+                    app:layout_constraintTop_toBottomOf="@+id/edHargaModal" />
 
                 <EditText
                     android:id="@+id/edKategori"
@@ -108,13 +237,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="16dp"
                     android:ems="10"
                     android:focusableInTouchMode="true"
                     android:hint="Stok"
                     android:inputType="number"
                     android:minHeight="48dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/edNamaProduk"
                     app:layout_constraintStart_toStartOf="@+id/edNamaProduk"
                     app:layout_constraintTop_toBottomOf="@+id/edKategori" />
@@ -186,7 +313,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/amiko_bold"
-                    android:text="Atur Harga Modal dan Barcode"
+                    android:text="Atur Barcode"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -204,49 +331,27 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView17" />
 
-                <com.cottacush.android.currencyedittext.CurrencyEditText
-                    android:id="@+id/edHargaModal"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:ems="10"
-                    android:hint="Harga Modal"
-                    android:inputType="number"
-                    android:minHeight="48dp"
-                    android:visibility="gone"
-                    android:windowSoftInputMode="adjustPan"
-                    app:currencySymbol="Rp"
-                    app:layout_constraintEnd_toEndOf="@+id/switch1"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="@+id/textView17"
-                    app:layout_constraintTop_toBottomOf="@+id/textView17"
-                    app:localeTag="ID" />
-
                 <EditText
                     android:id="@+id/edBarcode"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:ems="10"
-                    android:hint="Kode Produk/Barcode"
+                    android:hint="Barcode"
                     android:inputType="text"
                     android:minHeight="48dp"
-                    android:visibility="gone"
                     android:windowSoftInputMode="adjustPan"
-                    app:layout_constraintEnd_toEndOf="@+id/edHargaModal"
                     app:layout_constraintEnd_toStartOf="@+id/ivToAddQR"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_opsional1" />
+                    app:layout_constraintTop_toBottomOf="@+id/switch1" />
 
                 <ImageView
                     android:id="@+id/ivToAddQR"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_marginEnd="16dp"
-                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/edBarcode"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -255,24 +360,21 @@
                     app:srcCompat="@drawable/ic_baseline_qr_code_scanner_24" />
 
                 <TextView
-                    android:id="@+id/tv_opsional1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="*Opsional"
-                    android:visibility="gone"
-                    app:layout_constraintStart_toStartOf="@+id/edHargaModal"
-                    app:layout_constraintTop_toBottomOf="@+id/edHargaModal" />
-
-                <TextView
                     android:id="@+id/tv_opsional2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:text="*Opsional"
-                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/edHargaModal"
+                    app:layout_constraintStart_toStartOf="@+id/edBarcode"
                     app:layout_constraintTop_toBottomOf="@+id/edBarcode" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/g_barcode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:constraint_referenced_ids="edBarcode,ivToAddQR,tv_opsional2" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout

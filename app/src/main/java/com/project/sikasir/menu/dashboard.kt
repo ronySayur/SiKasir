@@ -1,8 +1,13 @@
 package com.project.sikasir.menu
 
+import android.app.*
+import android.app.PendingIntent.FLAG_UPDATE_CURRENT
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
@@ -17,17 +22,22 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.firebase.database.*
 import com.project.sikasir.R
 import com.project.sikasir.laporan.laporan
+import com.project.sikasir.laporan.penjualan.laporanPenjualan
+import com.project.sikasir.laporan.produk.laporanProduk
 import com.project.sikasir.navPack.ClickListener
 import com.project.sikasir.navPack.NavigationItemModel
 import com.project.sikasir.navPack.NavigationRVAdapter
 import com.project.sikasir.navPack.RecyclerTouchListener
 import com.project.sikasir.pegawai.pegawai
+import com.project.sikasir.penjualan.pembayaran.classDetailPenjualan
+import com.project.sikasir.penjualan.pembayaran.classPenjualan
+import com.project.sikasir.penjualan.pengaturan
+import com.project.sikasir.penjualan.penjualan.penjualan
+import com.project.sikasir.penjualan.riwayat.riwayatTransaksi
+import com.project.sikasir.produk.produk.classProduk
 import com.project.sikasir.produk.viewpager.viewPagerMenu
-import com.project.sikasir.transaksi.pembayaran.classDetailTransaksi
-import com.project.sikasir.transaksi.pembayaran.classTransaksi
-import com.project.sikasir.transaksi.pengaturan
-import com.project.sikasir.transaksi.riwayat.riwayatTransaksi
-import com.project.sikasir.transaksi.transaksi.transaksi
+import com.project.sikasir.supplier.supplier
+import com.project.sikasir.toko.toko
 import kotlinx.android.synthetic.main.dashhboard.*
 import kotlinx.android.synthetic.main.sheet_bottommenu.*
 import java.text.NumberFormat
@@ -48,14 +58,20 @@ class dashboard : AppCompatActivity() {
     lateinit var drawerLayout: DrawerLayout
     private lateinit var adapter: NavigationRVAdapter
     val Rp = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
+    val sdf = SimpleDateFormat("dd-MM-yyyy")
+    val currentDate = sdf.format(Date())
+
+    lateinit var notificationManager: NotificationManager
+    lateinit var notificationChannel: NotificationChannel
+    lateinit var builder: Notification.Builder
+    private val channelId = "i.apps.notifications"
+    private val description = "Test notification"
+    private var hak = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dashhboard)
         getUsernameLocal()
-        getData()
-        val sdf = SimpleDateFormat("dd-MM-yyyy")
-        val currentDate = sdf.format(Date())
 
         tv_lihatsemua.visibility = View.GONE
         textView9.text = currentDate
@@ -63,6 +79,10 @@ class dashboard : AppCompatActivity() {
         onClick()
         bottomSheetDashboard()
         navigationLayout()
+
+        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        getData()
+
     }
 
     private fun bottomSheetDashboard() {
@@ -70,11 +90,8 @@ class dashboard : AppCompatActivity() {
         bottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {}
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                //menghilangkan textview lihat semua
-                when (newState) {
-                    BottomSheetBehavior.STATE_EXPANDED -> tv_lihatsemua.visibility = View.VISIBLE
-                    BottomSheetBehavior.STATE_COLLAPSED -> tv_lihatsemua.visibility = View.GONE
-                }
+                if (newState == BottomSheetBehavior.STATE_EXPANDED) tv_lihatsemua.visibility = View.VISIBLE
+                else if (newState == BottomSheetBehavior.STATE_COLLAPSED) tv_lihatsemua.visibility = View.GONE
             }
         })
     }
@@ -92,7 +109,6 @@ class dashboard : AppCompatActivity() {
 
         val toggle: ActionBarDrawerToggle = object : ActionBarDrawerToggle(this, drawerLayout, activity_main_toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             override fun onDrawerClosed(drawerView: View) {
-                // Triggered once the drawer closes
                 super.onDrawerClosed(drawerView)
                 try {
                     val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -103,7 +119,6 @@ class dashboard : AppCompatActivity() {
             }
 
             override fun onDrawerOpened(drawerView: View) {
-                // Triggered once the drawer opens
                 super.onDrawerOpened(drawerView)
                 try {
                     val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -128,9 +143,10 @@ class dashboard : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 tv_namaakun.text = dataSnapshot.child("Nama_Pegawai").value.toString()
                 tv_nmjabatan.text = dataSnapshot.child("Nama_Jabatan").value.toString()
+                hak = dataSnapshot.child("Hak_Akses").value.toString()
 
-                val hak = dataSnapshot.child("Hak_Akses").value.toString()
                 if (hak == "Pegawai") {
+                    cvSupplier.visibility = View.GONE
                     cvPegawai.visibility = View.GONE
                     cvLaporan.visibility = View.GONE
                     val items = arrayListOf(
@@ -148,22 +164,18 @@ class dashboard : AppCompatActivity() {
                             when (position) {
                                 0 -> {
                                     startActivity(Intent(this@dashboard, dashboard::class.java))
-                                    finish()
                                 }
                                 1 -> {
                                     startActivity(Intent(this@dashboard, viewPagerMenu::class.java))
                                 }
                                 2 -> {
-                                    startActivity(Intent(this@dashboard, transaksi::class.java))
-                                    finish()
+                                    startActivity(Intent(this@dashboard, penjualan::class.java))
                                 }
                                 3 -> {
                                     startActivity(Intent(this@dashboard, riwayatTransaksi::class.java))
-                                    finish()
                                 }
                                 4 -> {
                                     startActivity(Intent(this@dashboard, pengaturan::class.java))
-                                    finish()
                                 }
                             }
                             if (position != 6 && position != 4) {
@@ -193,29 +205,24 @@ class dashboard : AppCompatActivity() {
                             when (position) {
                                 0 -> {
                                     startActivity(Intent(this@dashboard, dashboard::class.java))
-                                    finish()
                                 }
                                 1 -> {
                                     startActivity(Intent(this@dashboard, viewPagerMenu::class.java))
                                 }
                                 2 -> {
-                                    startActivity(Intent(this@dashboard, transaksi::class.java))
-                                    finish()
+                                    startActivity(Intent(this@dashboard, penjualan::class.java))
                                 }
                                 3 -> {
                                     startActivity(Intent(this@dashboard, riwayatTransaksi::class.java))
-                                    finish()
                                 }
                                 4 -> {
                                     startActivity(Intent(this@dashboard, pegawai::class.java))
                                 }
                                 5 -> {
                                     startActivity(Intent(this@dashboard, laporan::class.java))
-                                    finish()
                                 }
                                 6 -> {
                                     startActivity(Intent(this@dashboard, pengaturan::class.java))
-                                    finish()
                                 }
                                 7 -> {
                                     startActivity(Intent(this@dashboard, aboutMe::class.java))
@@ -238,38 +245,43 @@ class dashboard : AppCompatActivity() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
-            // Checking for fragment count on back stack
             if (supportFragmentManager.backStackEntryCount > 0) {
                 supportFragmentManager.popBackStack()
             } else {
-                // Exit the app
-                super.onBackPressed()
+                val builder = AlertDialog.Builder(this)
+                builder.setMessage("Yakin Untuk Keluar?").setCancelable(false)
+                    .setPositiveButton("Ya")
+                    { dialog, id ->
+                        super.onBackPressed()
+                    }
+                    .setNegativeButton("Tidak")
+                    { dialog, id ->
+                        dialog.dismiss()
+                    }
+                val alert = builder.create()
+                alert.show()
+
             }
         }
     }
 
     private fun onClick() {
-        //LihatSemua
-        tv_lihatsemua.setOnClickListener { startActivity(Intent(this@dashboard, laporan::class.java)) }
-        //CardViewTransaksi
-        cvTransaksi.setOnClickListener { startActivity(Intent(this, transaksi::class.java)) }
-        //CardViewPengaturan
+        tv_lihatsemua.setOnClickListener { startActivity(Intent(this, laporan::class.java)) }
+        cvTransaksi.setOnClickListener { startActivity(Intent(this, penjualan::class.java)) }
         cvPengaturan.setOnClickListener { startActivity(Intent(this, pengaturan::class.java)) }
-        //CardViewProduk
         cvProduk.setOnClickListener { startActivity(Intent(this, viewPagerMenu::class.java)) }
-        //CardViewPegawai
         cvPegawai.setOnClickListener { startActivity(Intent(this, pegawai::class.java)) }
-        //CardViewLaporan
         cvLaporan.setOnClickListener { startActivity(Intent(this, laporan::class.java)) }
-        //FloatingActionButton Tambah Transaksi
-        extendtambahtransaksi.setOnClickListener { startActivity(Intent(this, transaksi::class.java)) }
-        //profile
+        extendtambahtransaksi.setOnClickListener { startActivity(Intent(this, penjualan::class.java)) }
         clProfil.setOnClickListener { startActivity(Intent(this, profile::class.java)) }
+        cvSupplier.setOnClickListener { startActivity(Intent(this, supplier::class.java)) }
+        cvPenjualan.setOnClickListener { startActivity(Intent(this, laporanPenjualan::class.java)) }
+        cvProdukterjual.setOnClickListener { startActivity(Intent(this, laporanProduk::class.java)) }
+        cvToko.setOnClickListener { startActivity(Intent(this, toko::class.java)) }
     }
 
     private fun getData() {
-
-        val refTransaksi = FirebaseDatabase.getInstance().getReference("Transaksi").orderByValue()
+        val refTransaksi = FirebaseDatabase.getInstance().getReference("Penjualan").orderByValue()
         val refDetail = FirebaseDatabase.getInstance().getReference("DetailTransaksi")
         val refProduk = FirebaseDatabase.getInstance().getReference("Produk")
 
@@ -291,6 +303,7 @@ class dashboard : AppCompatActivity() {
 
                                     override fun onCancelled(error: DatabaseError) {}
                                 })
+
                             }
                         }
 
@@ -306,33 +319,57 @@ class dashboard : AppCompatActivity() {
     private fun initAdapter() {
         if (this::ssTransaksi.isInitialized && this::ssDetail.isInitialized && this::ssProduk.isInitialized) {
             var jumlahProduk = 0
-            var totalTransaksi = 0
+            var totalPenjualan = 0
 
-            //jika awal dan akhir kosong
-            if (awal == -1L && akhir == -1L) {
-                for (snapDetail in ssDetail.children) {
-                    val cd = snapDetail.getValue(classDetailTransaksi::class.java)
-                    jumlahProduk += cd?.jumlah_Produk?.toInt()!!
-                    totalTransaksi += cd.total?.replace(",00", "")?.filter { it.isDigit() }?.toInt()!!
-                }
-            } else {
-                for (snapDetail in ssDetail.children) {
-                    for (snapTransaksi in ssTransaksi.children) {
-                        val t = snapTransaksi.getValue(classTransaksi::class.java)
-                        val cd = snapDetail.getValue(classDetailTransaksi::class.java)
-                        //jika tanggal lebih dari sama dengan awal dan tanggal kurang dari sama dengan akhir
-                        if (t?.tanggal!! >= awal && t.tanggal!! <= akhir) {
-                            jumlahProduk += cd?.jumlah_Produk?.toInt()!!
-                            totalTransaksi += cd.total?.replace(",00", "")?.filter { it.isDigit() }?.toInt()!!
-                        }
+            awal = Calendar.getInstance().time.time - 12 * 60 * 60 * 1000
+            akhir = Calendar.getInstance().time.time
+
+            for (snapDetail in ssDetail.children) {
+                for (snapTransaksi in ssTransaksi.children) {
+                    val t = snapTransaksi.getValue(classPenjualan::class.java)
+                    val cd = snapDetail.getValue(classDetailPenjualan::class.java)
+
+                    if (t?.tanggal!! >= awal && t.tanggal!! <= akhir && t.detailTransaksi.equals(cd?.detailTransaksi)) {
+                        jumlahProduk += cd?.jumlah_Produk?.toInt()!!
+                        totalPenjualan += cd.total?.replace(",00", "")?.filter { it.isDigit() }?.toInt()!!
                     }
                 }
             }
+            for (snapProduk in ssProduk.children) {
+                val p = snapProduk.getValue(classProduk::class.java)
+                if (p?.stok!!.toInt() < 10 && hak == "Pemilik") {
+                    val intent = Intent(this, laporanProduk::class.java)
+                    val pendingIntent = PendingIntent.getActivity(this, 0, intent, FLAG_UPDATE_CURRENT)
 
-            val totalString = Rp.format(totalTransaksi)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        notificationChannel = NotificationChannel(channelId, description, NotificationManager.IMPORTANCE_HIGH)
+                        notificationChannel.enableLights(true)
+                        notificationChannel.lightColor = Color.GREEN
+                        notificationChannel.enableVibration(false)
+                        notificationManager.createNotificationChannel(notificationChannel)
+
+                        builder = Notification.Builder(this, channelId)
+                            .setContentTitle("Produk Mau Habis")
+                            .setContentText(p.nama_Produk + " tersisa " + p.stok + " segera lakukan pembelian")
+                            .setSmallIcon(R.drawable.logoaida)
+                            .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.logoaida))
+                            .setContentIntent(pendingIntent)
+                    } else {
+                        builder = Notification.Builder(this)
+                            .setContentTitle("Produk Mau Habis")
+                            .setContentText(p.nama_Produk + " tersisa " + p.stok + " segera lakukan pembelian")
+                            .setSmallIcon(R.drawable.logoaida)
+                            .setLargeIcon(BitmapFactory.decodeResource(this.resources, R.drawable.logoaida))
+                            .setContentIntent(pendingIntent)
+                    }
+                    notificationManager.notify(1234, builder.build())
+                }
+            }
+            val totalString = Rp.format(totalPenjualan)
             val total = totalString.substring(0, 2) + " " + totalString.substring(2, totalString.length)
 
-            tv_jumlah_produk_today.text = "$jumlahProduk Produk"
+            tv_total_penjualan.text = total
+            "$jumlahProduk Produk".also { tv_jumlah_produk_today.text = it }
         }
     }
 }

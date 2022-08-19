@@ -25,86 +25,68 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/kp_tv_namalist"
+                android:id="@+id/list_penjualan_tgl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:fontFamily="@font/amiko_bold"
-                android:text="Nama_Produk"
+                android:fontFamily="@font/amiko"
+                android:text="Tanggal"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="#00B0FF"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:textSize="12sp"
                 android:typeface="monospace"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_stokJudul2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/amiko"
-                android:text="x"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:typeface="sans"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_jumlah_beli"
-                app:layout_constraintStart_toEndOf="@+id/tv_jumlah_beli"
-                app:layout_constraintTop_toTopOf="@+id/tv_jumlah_beli" />
-
-            <TextView
-                android:id="@+id/tv_jumlah_beli"
+                android:id="@+id/nama_vendor"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/amiko_bold"
+                android:text="nama_supplier"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:typeface="sans"
+                app:layout_constraintBottom_toBottomOf="@+id/list_total_transaksi"
+                app:layout_constraintStart_toStartOf="@+id/list_penjualan_tgl"
+                app:layout_constraintTop_toTopOf="@+id/tv_pembelian_total" />
+
+            <TextView
+                android:id="@+id/tv_pembelian_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/amiko"
+                android:text="total pembelian"
+                android:textAlignment="viewEnd"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#FF3D00"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:typeface="sans"
+                app:layout_constraintEnd_toEndOf="@+id/list_total_transaksi"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/list_total_transaksi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/amiko"
-                android:text="0"
-                android:textAlignment="center"
+                android:text="total transaksi"
+                android:textAlignment="viewEnd"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:textSize="14sp"
-                android:textStyle="bold"
                 android:typeface="sans"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/kp_tv_namalist"
-                app:layout_constraintTop_toBottomOf="@+id/kp_tv_namalist" />
-
-            <TextView
-                android:id="@+id/tv_hargamodal_pembelian"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/amiko"
-                android:text="harga"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:typeface="sans"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_jumlah_beli"
-                app:layout_constraintStart_toEndOf="@+id/tv_stokJudul2"
-                app:layout_constraintTop_toTopOf="@+id/tv_jumlah_beli" />
-
-            <TextView
-                android:id="@+id/tv_total_pembelian"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="@font/amiko"
-                android:text="total"
-                android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:typeface="sans"
-                app:layout_constraintBottom_toBottomOf="@+id/tv_hargamodal_pembelian"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_hargamodal_pembelian" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_pembelian_total" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

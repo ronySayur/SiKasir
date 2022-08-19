@@ -133,6 +133,39 @@
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/clLaporanPenjualan"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintEnd_toEndOf="@+id/cvRangkuman"
+                            app:layout_constraintStart_toStartOf="@+id/cvRangkuman"
+                            app:layout_constraintTop_toBottomOf="@+id/clLaporanPembelian">
+
+                            <TextView
+                                android:id="@+id/tvLaporanPenjualan"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center|left"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginBottom="16dp"
+                                android:fontFamily="@font/amiko_bold"
+                                android:text="Laporan Penjualan"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/ivLaporanPenjualan"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center|right"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginRight="16dp"
+                                android:layout_marginBottom="16dp"
+                                app:srcCompat="@drawable/ic_baseline_chevron_right_24" />
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
                             android:id="@+id/clLaporanProduk"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
@@ -277,7 +310,7 @@
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="@+id/cvRangkuman"
                             app:layout_constraintStart_toStartOf="@+id/cvRangkuman"
-                            app:layout_constraintTop_toBottomOf="@+id/clLaporanPembelian">
+                            app:layout_constraintTop_toBottomOf="@+id/clLaporanPenjualan">
 
                             <TextView
                                 android:id="@+id/tvLaporanPegawai"

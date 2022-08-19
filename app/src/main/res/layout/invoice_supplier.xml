@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView91"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/amiko_bold"
+                android:lineSpacingExtra="10sp"
+                android:text="Informasi Produk"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:typeface="sans"
+                app:layout_constraintStart_toStartOf="@+id/view16"
+                app:layout_constraintTop_toBottomOf="@+id/textView105" />
+
+            <TextView
+                android:id="@+id/textView116"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="16dp"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="@+id/view19"
+                app:layout_constraintStart_toStartOf="@+id/view16"
+                app:layout_constraintTop_toBottomOf="@+id/view19" />
+
+            <View
+                android:id="@+id/view19"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:background="#000000"
+                app:layout_constraintEnd_toStartOf="@+id/view17"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView117" />
+
+            <TextView
+                android:id="@+id/textView117"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/amiko_bold"
+                android:lineSpacingExtra="10sp"
+                android:text="Keterangan"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:typeface="sans"
+                app:layout_constraintStart_toStartOf="@+id/view16"
+                app:layout_constraintTop_toBottomOf="@+id/textView108" />
+
+            <View
+                android:id="@+id/view17"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="#000000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/view16"
+                app:layout_constraintTop_toTopOf="@+id/view16" />
+
+            <View
+                android:id="@+id/view16"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="#000000"
+                app:layout_constraintEnd_toStartOf="@+id/view17"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView100" />
+
+            <View
+                android:id="@+id/view20"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:background="#000000"
+                app:layout_constraintEnd_toStartOf="@+id/view17"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView91" />
+
+            <TextView
+                android:id="@+id/textView93"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="32dp"
+                android:fontFamily="@font/amiko_bold"
+                android:text="Laporan Pembelian"
+                android:textColor="#00B0FF"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView100"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/amiko_bold"
+                android:lineSpacingExtra="10sp"
+                android:text="Info Perusahaan"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:typeface="sans"
+                app:layout_constraintStart_toStartOf="@+id/view16"
+                app:layout_constraintTop_toTopOf="@+id/textView101" />
+
+            <TextView
+                android:id="@+id/textView101"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:fontFamily="@font/amiko_bold"
+                android:lineSpacingExtra="10sp"
+                android:text="Data Pemilik/PIC/Sales Person Vendor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:typeface="sans"
+                app:layout_constraintStart_toStartOf="@+id/view17"
+                app:layout_constraintTop_toBottomOf="@+id/textView93" />
+
+            <TextView
+                android:id="@+id/tv_nm_vendor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="TextView"
+                android:textColor="#00B0FF"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/view16"
+                app:layout_constraintTop_toBottomOf="@+id/view16" />
+
+            <TextView
+                android:id="@+id/textView103"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="#00B0FF"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/textView101"
+                app:layout_constraintTop_toTopOf="@+id/tv_nm_vendor" />
+
+            <TextView
+                android:id="@+id/textView104"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="TextView"
+                app:layout_constraintStart_toStartOf="@+id/tv_nm_vendor"
+                app:layout_constraintTop_toBottomOf="@+id/tv_nm_vendor" />
+
+            <TextView
+                android:id="@+id/textView105"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                app:layout_constraintStart_toStartOf="@+id/textView104"
+                app:layout_constraintTop_toBottomOf="@+id/textView104" />
+
+            <TextView
+                android:id="@+id/textView106"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="TextView"
+                app:layout_constraintStart_toStartOf="@+id/textView103"
+                app:layout_constraintTop_toBottomOf="@+id/textView103" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_lapBeli"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/view17"
+                app:layout_constraintStart_toStartOf="@+id/view16"
+                app:layout_constraintTop_toBottomOf="@+id/view20"
+                tools:listitem="@layout/list_detail_pembelian" />
+
+            <TextView
+                android:id="@+id/textView108"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/amiko_bold"
+                android:lineSpacingExtra="10sp"
+                android:text="Total Pembelian"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:typeface="sans"
+                app:layout_constraintStart_toStartOf="@+id/textView101"
+                app:layout_constraintTop_toBottomOf="@+id/rv_lapBeli" />
+
+            <TextView
+                android:id="@+id/textView109"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/amiko_bold"
+                android:lineSpacingExtra="10sp"
+                android:text="TextView"
+                android:textAlignment="viewEnd"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:typeface="sans"
+                app:layout_constraintEnd_toEndOf="@+id/rv_lapBeli"
+                app:layout_constraintTop_toTopOf="@+id/textView108" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

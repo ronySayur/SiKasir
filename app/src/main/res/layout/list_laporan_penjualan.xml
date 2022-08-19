@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp"
+        android:background="@drawable/round_corner_black_outer"
+        android:elevation="2dp"
+        android:foregroundGravity="center"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="1dp"
+        app:cardMaxElevation="3dp"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/list_penjualan_tgl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/amiko_bold"
+                android:text="Tanggal"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#00B0FF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:typeface="monospace"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_stokJudul2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/amiko"
+                android:text="x"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:typeface="sans"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/list_nonoata"
+                app:layout_constraintStart_toEndOf="@+id/list_nonoata"
+                app:layout_constraintTop_toTopOf="@+id/list_nonoata" />
+
+            <TextView
+                android:id="@+id/list_nonoata"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/amiko"
+                android:text="Nomor Nota"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp"
+                android:typeface="sans"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/list_penjualan_tgl"
+                app:layout_constraintTop_toBottomOf="@+id/list_penjualan_tgl" />
+
+            <TextView
+                android:id="@+id/tv_hargamodal_pembelian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/amiko"
+                android:text="harga"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:typeface="sans"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/list_nonoata"
+                app:layout_constraintStart_toEndOf="@+id/tv_stokJudul2"
+                app:layout_constraintTop_toTopOf="@+id/list_nonoata" />
+
+            <TextView
+                android:id="@+id/list_total_penjualan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/amiko"
+                android:text="total"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp"
+                android:typeface="sans"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_hargamodal_pembelian"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_hargamodal_pembelian" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

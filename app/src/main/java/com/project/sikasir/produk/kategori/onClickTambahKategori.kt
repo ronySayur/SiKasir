@@ -85,7 +85,7 @@ class onClickTambahKategori : DialogFragment() {
 
     fun deleteKategori() {
         reference = FirebaseDatabase.getInstance().reference.child("Kategori").child(edNama.text.toString())
-        reference.addValueEventListener(object : ValueEventListener {
+        reference.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     for (userSnapshot in snapshot.children) {

@@ -39,7 +39,7 @@ class adapterLaporanPegawai(private val listPegawai: ArrayList<classLapPegawai>)
         holder.Nama.text = currentitem.namaPegawai
         holder.Jabatan.text = currentitem.jabatan
         holder.Omset.text = Rp.format(currentitem.omset)
-        holder.Jumlah_Transaksi.text = currentitem.jumlahTransaksi.toString()
+        holder.Jumlah_Transaksi.text = currentitem.jumlahTransaksi.toString() + " Transaksi"
 
     }
 }

@@ -29,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView10">
 
         <TextView
-            android:id="@+id/textView27"
+            android:id="@+id/tv_test_dash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -65,7 +65,7 @@
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView27" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_test_dash" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvPenjualan"
@@ -79,7 +79,7 @@
             app:layout_constraintEnd_toStartOf="@+id/cvProdukterjual"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="@+id/textView27"
+            app:layout_constraintStart_toStartOf="@+id/tv_test_dash"
             app:layout_constraintTop_toBottomOf="@+id/tv_lihatsemua">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -92,19 +92,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="Penjualan Hari Ini"
-                    app:layout_constraintBottom_toTopOf="@+id/textView10"
+                    app:layout_constraintBottom_toTopOf="@+id/tv_total_penjualan"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_chainStyle="packed" />
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/tv_total_penjualan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/amiko_bold"
                     android:text="Rp0"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textColor="#00B0FF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tvTitleCVPenjualan"
                     app:layout_constraintTop_toBottomOf="@+id/tvTitleCVPenjualan" />
@@ -146,6 +147,7 @@
                     android:fontFamily="@font/amiko_bold"
                     android:text="0"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textColor="#00B0FF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tvTitleCVProdukTerjual"
                     app:layout_constraintTop_toBottomOf="@+id/tvTitleCVProdukTerjual" />

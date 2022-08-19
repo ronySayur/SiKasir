@@ -59,20 +59,16 @@ class pegawai : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     rv_pegawai.visibility = View.VISIBLE
-                    iv_kosong.visibility = View.GONE
-                    tv_kosong.visibility = View.GONE
+                    g_kosong.visibility = View.GONE
                     pegawaiList.clear()
-
                     for (userSnapshot in snapshot.children) {
                         val classPegawai = userSnapshot.getValue(classPegawai::class.java)
                         pegawaiList.add(classPegawai!!)
                     }
-
                     rv_pegawai.adapter = adapterPegawai(pegawaiList)
                 } else {
                     rv_pegawai.visibility = View.GONE
-                    iv_kosong.visibility = View.VISIBLE
-                    tv_kosong.visibility = View.VISIBLE
+                    g_kosong.visibility = View.VISIBLE
                 }
             }
 

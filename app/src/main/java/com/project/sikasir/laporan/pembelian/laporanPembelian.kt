@@ -10,17 +10,19 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.project.sikasir.R
-import com.project.sikasir.produk.pembelian.classPembelian
+import com.project.sikasir.pembelian.classPembelian
 import com.project.sikasir.produk.produk.classProduk
+import com.project.sikasir.supplier.classSupplier
 import kotlinx.android.synthetic.main.laporan_pembelian.*
 import java.text.NumberFormat
 import java.util.*
 
 class laporanPembelian : AppCompatActivity() {
-    val pembelian = ArrayList<classLapPembelian>()
+    val classBeli = ArrayList<classLapPembelian>()
     val Rp = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
 
     private lateinit var ssPembelian: DataSnapshot
+    private lateinit var ssSupplier: DataSnapshot
     private lateinit var ssProduk: DataSnapshot
 
     private var awal = -1L
@@ -60,24 +62,31 @@ class laporanPembelian : AppCompatActivity() {
         rv_riwayat.setHasFixedSize(true)
 
         val refPembelian = FirebaseDatabase.getInstance().getReference("Pembelian").orderByValue()
+        val refSupplier = FirebaseDatabase.getInstance().getReference("Supplier")
         val refProduk = FirebaseDatabase.getInstance().getReference("Produk")
 
-        refPembelian.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshotPembelian: DataSnapshot) {
-                if (snapshotPembelian.exists()) {
+        refSupplier.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshotSupplier: DataSnapshot) {
+                refPembelian.addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(snapshotPembelian: DataSnapshot) {
+                        if (snapshotPembelian.exists()) {
+                            refProduk.addValueEventListener(object : ValueEventListener {
+                                override fun onDataChange(snapshotProduk: DataSnapshot) {
+                                    if (snapshotPembelian.exists()) {
+                                        ssPembelian = snapshotPembelian
+                                        ssSupplier = snapshotSupplier
+                                        ssProduk = snapshotProduk
+                                        initAdapter()
+                                    }
+                                }
 
-                    refProduk.addValueEventListener(object : ValueEventListener {
-                        override fun onDataChange(snapshotProduk: DataSnapshot) {
-                            if (snapshotProduk.exists()) {
-                                ssPembelian = snapshotPembelian
-                                ssProduk = snapshotProduk
-                                initAdapter()
-                            }
+                                override fun onCancelled(error: DatabaseError) {}
+                            })
                         }
+                    }
 
-                        override fun onCancelled(error: DatabaseError) {}
-                    })
-                }
+                    override fun onCancelled(error: DatabaseError) {}
+                })
             }
 
             override fun onCancelled(error: DatabaseError) {}
@@ -85,66 +94,61 @@ class laporanPembelian : AppCompatActivity() {
     }
 
     private fun initAdapter() {
-        if (this::ssPembelian.isInitialized && this::ssProduk.isInitialized) {
-            var jumlahPembelian = 0
+        if (this::ssSupplier.isInitialized && this::ssPembelian.isInitialized && this::ssProduk.isInitialized) {
+            var jumlahTransaksi = 0
             var totalTransaksi = 0
-            pembelian.clear()
+            classBeli.clear()
 
-            //jika awal dan akhir kosong
             if (awal == -1L && akhir == -1L) {
-                for (snapPembelian in ssPembelian.children) {
-                    val cd = snapPembelian.getValue(classPembelian::class.java)
-                    jumlahPembelian += cd?.jumlah_Produk?.toInt()!!
-                    totalTransaksi += cd.totalPembelian?.replace(",00", "")?.filter { it.isDigit() }?.toInt()!!
+                for (snapBeli in ssPembelian.children) {
+                    val pembelian = snapBeli.getValue(classPembelian::class.java)
+                    jumlahTransaksi += 1
+                    totalTransaksi += pembelian?.totalPembelian?.replace(",00", "")?.filter { it.isDigit() }?.toInt()!!
                 }
             } else {
-                for (snapPembelian in ssPembelian.children) {
-                    val cd = snapPembelian.getValue(classPembelian::class.java)
-                    println("cdawal" + cd)
-                    //jika tanggal lebih dari sama dengan awal dan tanggal kurang dari sama dengan akhir
-                    if (cd?.tglLong!! >= awal && cd.tglLong!! <= akhir) {
-                        jumlahPembelian += cd.jumlah_Produk?.toInt()!!
-                        totalTransaksi += cd.totalPembelian?.replace(",00", "")?.filter { it.isDigit() }?.toInt()!!
+                for (snapBeli in ssPembelian.children) {
+                    val pembelian = snapBeli.getValue(classPembelian::class.java)
+
+                    if (pembelian?.id_pembelian!! >= awal && pembelian.id_pembelian!! <= akhir) {
+                        jumlahTransaksi += 1
+                        totalTransaksi += pembelian.totalPembelian?.replace(",00", "")?.filter { it.isDigit() }?.toInt()!!
                     }
                 }
             }
-
 
             val totalString = Rp.format(totalTransaksi)
             val total = totalString.substring(0, 2) + " " + totalString.substring(2, totalString.length)
-            totaltransaksi_nama_pembelian.text = total
-            totaltransaksi_nama.text = "$jumlahPembelian Produk"
 
-            //RV
-            for (snapProduk in ssProduk.children) {
-                val p = snapProduk.getValue(classProduk::class.java)
-                val clp = classLapPembelian(p?.nama_Produk, p?.harga_Modal)
+            tv_tot_pembelian.text = total
+            tv_jmltransaksi.text = jumlahTransaksi.toString()
 
-                //jika awal dan akhir kosong
-                if (awal == -1L && akhir == -1L) {
-                    for (snapPembelian in ssPembelian.children) {
-                        val cp = snapPembelian.getValue(classPembelian::class.java)
-                        println("snapPembelian" + snapPembelian)
-                        println("CD" + cp)
-                        if (cp?.namaProduk.equals(p?.nama_Produk)) {
-                            clp.jumlah_Produk = clp.jumlah_Produk?.plus(1)
-                            clp.totalPembelian = cp?.totalPembelian?.replace(",00", "")?.filter { it.isDigit() }?.let { clp.totalPembelian?.plus(it.toInt()) }
-                        }
-                    }
-                } else {
-                    for (snapPembelian in ssPembelian.children) {
-                        val cp = snapPembelian.getValue(classPembelian::class.java)
-                        println("snapPembelian" + snapPembelian)
-                        println("CD" + cp)
-                        if (cp?.namaProduk.equals(p?.nama_Produk) && cp?.tglLong!! >= awal && cp.tglLong!! <= akhir) {
-                            clp.jumlah_Produk = clp.jumlah_Produk?.plus(1)
-                            clp.totalPembelian = cp.totalPembelian?.replace(",00", "")?.filter { it.isDigit() }?.let { clp.totalPembelian?.plus(it.toInt()) }
+            for (snapSupplier in ssSupplier.children) {
+                val supplier = snapSupplier.getValue(classSupplier::class.java)
+                val lPembelian = classLapPembelian()
+                lPembelian.nama_Vendor = supplier?.nama_Vendor
+                lPembelian.email_Vendor = supplier?.email_Vendor
+                lPembelian.no_Vendor = supplier?.no_Vendor
+                lPembelian.nama_PIC = supplier?.nama_PIC
+                lPembelian.noPIC = supplier?.noPIC
+
+                for (snapProduk in ssProduk.children) {
+                    val produk = snapProduk.getValue(classProduk::class.java)
+                    if (produk?.nama_Vendor == supplier?.nama_Vendor) {
+                        for (snapPembelian in ssPembelian.children) {
+                            val Pembelian = snapPembelian.getValue(classPembelian::class.java)
+
+                            lPembelian.totalPembelian = Pembelian?.totalPembelian?.replace(",00", "")?.filter { it.isDigit() }?.let { lPembelian.totalPembelian?.plus(it.toInt()) }
+                            lPembelian.keterangan = Pembelian?.keterangan
+                            lPembelian.jumlahTransaksi = lPembelian.jumlahTransaksi?.plus(1)
+
                         }
                     }
                 }
-                pembelian.add(clp)
+                if (lPembelian.jumlahTransaksi?.toString()?.toInt()!! > 0) {
+                    classBeli.add(lPembelian)
+                }
             }
-            rv_riwayat.adapter = adapterLaporanPembelian(pembelian)
+            rv_riwayat.adapter = adapterLaporanPembelian(classBeli)
         }
     }
 }

@@ -9,6 +9,8 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -21,25 +23,46 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:theme">
         <activity
-            android:name=".produk.pembelian.kelolaPembelian"
+            android:name=".toko.kelolaToko"
             android:exported="false" />
         <activity
-            android:name=".produk.pembelian.pembelian"
-            android:exported="false" />
-        <activity
-            android:name=".transaksi.riwayat.detailRiwayat"
-            android:exported="false" />
-        <activity
-            android:name=".laporan.produk.laporanProduk"
+            android:name=".toko.toko"
             android:exported="false" />
         <activity
             android:name=".laporan.pembelian.laporanPembelian"
             android:exported="false" />
         <activity
+            android:name=".supplier.kelolaSupplier"
+            android:exported="false" />
+        <activity
+            android:name=".supplier.supplier"
+            android:exported="false" />
+        <activity
+            android:name=".laporan.penjualan.invoice"
+            android:exported="false" />
+        <activity
+            android:name=".laporan.pembelian.invoiceSup"
+            android:exported="false" />
+        <activity
+            android:name=".pembelian.kelolaPembelian"
+            android:exported="false" />
+        <activity
+            android:name=".laporan.penjualan.laporanPenjualan"
+            android:exported="false" />
+        <activity
+            android:name=".pembelian.pembelian"
+            android:exported="false" />
+        <activity
+            android:name=".penjualan.riwayat.detailRiwayat"
+            android:exported="false" />
+        <activity
+            android:name=".laporan.produk.laporanProduk"
+            android:exported="false" />
+        <activity
             android:name=".laporan.ringkasan.ringkasan"
             android:exported="false" />
         <activity
-            android:name=".transaksi.keranjang.kelolaKeranjang"
+            android:name=".penjualan.keranjang.kelolaKeranjang"
             android:exported="false"
             android:noHistory="true" />
         <activity
@@ -49,14 +72,14 @@
             android:name=".menu.aboutMe"
             android:exported="false" />
         <activity
-            android:name=".transaksi.pengaturan"
+            android:name=".penjualan.pengaturan"
             android:exported="false" />
         <activity
-            android:name=".transaksi.riwayat.riwayatTransaksi"
+            android:name=".penjualan.riwayat.riwayatTransaksi"
             android:exported="false"
             android:noHistory="true" />
         <activity
-            android:name=".transaksi.transaksi.transaksiBerhasil"
+            android:name=".penjualan.penjualan.transaksiBerhasil"
             android:exported="false" />
         <activity
             android:name=".laporan.laporan"
@@ -66,13 +89,13 @@
             android:exported="false"
             android:noHistory="false" />
         <activity
-            android:name=".transaksi.pembayaran.pembayaran"
+            android:name=".penjualan.pembayaran.pembayaran"
             android:exported="false" />
         <activity
-            android:name=".transaksi.transaksi.scanBarcodeTambahTransaksi"
+            android:name=".penjualan.penjualan.scanBarcodeTambahTransaksi"
             android:exported="false" />
         <activity
-            android:name=".transaksi.transaksi.transaksi"
+            android:name=".penjualan.penjualan.penjualan"
             android:exported="false" />
         <activity
             android:name=".pegawai.pegawai"

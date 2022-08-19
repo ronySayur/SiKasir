@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".toko.toko">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_sup"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fadingEdge="horizontal"
+        android:foregroundGravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
+        app:spanCount="5"
+        tools:listitem="@layout/list_toko" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_toko"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:clickable="true"
+        android:contentDescription="@string/fab_transformation_scrim_behavior"
+        app:backgroundTint="#40C4FF"
+        app:elevation="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="#FFFFFF"
+        app:srcCompat="@drawable/ic_baseline_add_24" />
+
+    <ImageView
+        android:id="@+id/iv_kosong4"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rv_sup"
+        app:srcCompat="@drawable/iconpegawai" />
+
+    <TextView
+        android:id="@+id/tv_kosong4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/bangers"
+        android:lineSpacingExtra="24sp"
+        android:text="Belum ada Toko       "
+        android:textColor="#0288D1"
+        android:textSize="20sp"
+        android:typeface="sans"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/iv_kosong4"
+        app:layout_constraintStart_toStartOf="@+id/iv_kosong4"
+        app:layout_constraintTop_toBottomOf="@+id/iv_kosong4" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:elevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_judul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/amiko_bold"
+            android:text="Toko"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tvA5toA2"
+            app:layout_constraintStart_toEndOf="@+id/tvA5toA2"
+            app:layout_constraintTop_toTopOf="@+id/tvA5toA2" />
+
+        <TextView
+            android:id="@+id/tvA5toA2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/amiko_bold"
+            android:text="←"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/g_kosong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="iv_kosong4,tv_kosong4" />
+</androidx.constraintlayout.widget.ConstraintLayout>

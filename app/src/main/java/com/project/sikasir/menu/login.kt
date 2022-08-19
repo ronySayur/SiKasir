@@ -57,6 +57,7 @@ class login : AppCompatActivity() {
 
                                     //validasi password firebase
                                     if (Pin == passwordFromFirebase) {
+
                                         //menyimpan kepada lokal storage/smartphone
                                         val sharedPreferences: SharedPreferences = getSharedPreferences(USERNAME_KEY, Context.MODE_PRIVATE)
                                         val editor: SharedPreferences.Editor = sharedPreferences.edit()

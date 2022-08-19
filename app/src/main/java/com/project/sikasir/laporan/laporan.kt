@@ -20,6 +20,7 @@ import com.project.sikasir.R
 import com.project.sikasir.laporan.kategori.laporanKategori
 import com.project.sikasir.laporan.pegawai.laporanPegawai
 import com.project.sikasir.laporan.pembelian.laporanPembelian
+import com.project.sikasir.laporan.penjualan.laporanPenjualan
 import com.project.sikasir.laporan.produk.laporanProduk
 import com.project.sikasir.laporan.rangkuman.laporanRangkuman
 import com.project.sikasir.laporan.ringkasan.ringkasan
@@ -30,10 +31,10 @@ import com.project.sikasir.navPack.NavigationItemModel
 import com.project.sikasir.navPack.NavigationRVAdapter
 import com.project.sikasir.navPack.RecyclerTouchListener
 import com.project.sikasir.pegawai.pegawai
+import com.project.sikasir.penjualan.pengaturan
+import com.project.sikasir.penjualan.penjualan.penjualan
+import com.project.sikasir.penjualan.riwayat.riwayatTransaksi
 import com.project.sikasir.produk.viewpager.viewPagerMenu
-import com.project.sikasir.transaksi.pengaturan
-import com.project.sikasir.transaksi.riwayat.riwayatTransaksi
-import com.project.sikasir.transaksi.transaksi.transaksi
 import kotlinx.android.synthetic.main.laporan_menu.*
 
 class laporan : AppCompatActivity() {
@@ -58,6 +59,7 @@ class laporan : AppCompatActivity() {
         cvPenjualanPerKategori.setOnClickListener { startActivity(Intent(applicationContext, laporanKategori::class.java)) }
         LaporanPegawai.setOnClickListener { startActivity(Intent(applicationContext, laporanPegawai::class.java)) }
         clLaporanProduk.setOnClickListener { startActivity(Intent(applicationContext, laporanProduk::class.java)) }
+        clLaporanPenjualan.setOnClickListener { startActivity(Intent(applicationContext, laporanPenjualan::class.java)) }
         clLaporanPembelian.setOnClickListener { startActivity(Intent(applicationContext, laporanPembelian::class.java)) }
 
     }
@@ -82,7 +84,7 @@ class laporan : AppCompatActivity() {
                         startActivity(Intent(this@laporan, viewPagerMenu::class.java))
                     }
                     2 -> {
-                        startActivity(Intent(this@laporan, transaksi::class.java))
+                        startActivity(Intent(this@laporan, penjualan::class.java))
                         finish()
                     }
                     3 -> {
@@ -151,7 +153,7 @@ class laporan : AppCompatActivity() {
 
     private fun updateAdapter(highlightItemPos: Int) {
         val refPegawai = FirebaseDatabase.getInstance().reference.child("Pegawai").child(username_key_new)
-        refPegawai.addValueEventListener(object : ValueEventListener {
+        refPegawai.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 tv_namaakun.text = dataSnapshot.child("Nama_Pegawai").value.toString()
                 tv_nmjabatan.text = dataSnapshot.child("Nama_Jabatan").value.toString()

@@ -1,4 +1,4 @@
-package com.project.sikasir.transaksi
+package com.project.sikasir.penjualan
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -37,9 +37,9 @@ import com.project.sikasir.navPack.NavigationItemModel
 import com.project.sikasir.navPack.NavigationRVAdapter
 import com.project.sikasir.navPack.RecyclerTouchListener
 import com.project.sikasir.pegawai.pegawai
+import com.project.sikasir.penjualan.penjualan.penjualan
+import com.project.sikasir.penjualan.riwayat.riwayatTransaksi
 import com.project.sikasir.produk.viewpager.viewPagerMenu
-import com.project.sikasir.transaksi.riwayat.riwayatTransaksi
-import com.project.sikasir.transaksi.transaksi.transaksi
 import kotlinx.android.synthetic.main.pengaturan.*
 
 class pengaturan : AppCompatActivity() {
@@ -115,7 +115,7 @@ class pengaturan : AppCompatActivity() {
                         startActivity(Intent(this@pengaturan, viewPagerMenu::class.java))
                     }
                     2 -> {
-                        startActivity(Intent(this@pengaturan, transaksi::class.java))
+                        startActivity(Intent(this@pengaturan, penjualan::class.java))
                         finish()
                     }
                     3 -> {

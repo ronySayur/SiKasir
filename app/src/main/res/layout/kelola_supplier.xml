@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EAEAEA"
+    android:elevation="10dp"
+    tools:context=".supplier.kelolaSupplier">
+
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#FFFFFF"
+                android:elevation="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_judul"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/amiko_bold"
+                    android:text="Kelola Supplier"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvA5toA2"
+                    app:layout_constraintStart_toEndOf="@+id/tvA5toA2"
+                    app:layout_constraintTop_toTopOf="@+id/tvA5toA2" />
+
+                <TextView
+                    android:id="@+id/tvA5toA2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:fontFamily="@font/amiko_bold"
+                    android:text="←"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView88"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="24dp"
+                    android:fontFamily="@font/amiko"
+                    android:text="SIMPAN"
+                    android:textAlignment="viewEnd"
+                    android:textColor="#2979FF"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:typeface="sans"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout15"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#FFFFFF"
+                android:elevation="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+
+                <View
+                    android:id="@+id/view10"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="#3A3A3A"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textView81" />
+
+                <TextView
+                    android:id="@+id/textView81"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/amiko_bold"
+                    android:text="Data Vendor"
+                    android:textColor="#070707"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView78"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/amiko"
+                    android:text="Email"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    android:typeface="sans"
+                    app:layout_constraintBottom_toBottomOf="@+id/edtEmailSupplier"
+                    app:layout_constraintStart_toStartOf="@+id/textView73"
+                    app:layout_constraintTop_toTopOf="@+id/edtEmailSupplier" />
+
+                <TextView
+                    android:id="@+id/textView73"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/amiko"
+                    android:text="Alamat Kantor"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    android:typeface="sans"
+                    app:layout_constraintBottom_toBottomOf="@+id/edtAlamatSupplier"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/edtAlamatSupplier" />
+
+                <TextView
+                    android:id="@+id/textView70"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/amiko"
+                    android:text="Nama Vendor"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    android:typeface="sans"
+                    app:layout_constraintBottom_toBottomOf="@+id/edtNamaVendor"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/edtNamaVendor" />
+
+                <TextView
+                    android:id="@+id/textView77"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/amiko"
+                    android:text="No. Telp"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    android:typeface="sans"
+                    app:layout_constraintBottom_toBottomOf="@+id/edtHpVendor"
+                    app:layout_constraintStart_toStartOf="@+id/textView73"
+                    app:layout_constraintTop_toTopOf="@+id/edtHpVendor" />
+
+                <EditText
+                    android:id="@+id/edtHpVendor"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:ems="10"
+                    android:hint="Nomor Telepon"
+                    android:inputType="phone"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="@+id/edtNamaVendor"
+                    app:layout_constraintStart_toStartOf="@+id/edtNamaVendor"
+                    app:layout_constraintTop_toBottomOf="@+id/edtNamaVendor" />
+
+                <EditText
+                    android:id="@+id/edtEmailSupplier"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:ems="10"
+                    android:hint="Email Vendor"
+                    android:inputType="textEmailAddress"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="@+id/edtNamaVendor"
+                    app:layout_constraintStart_toStartOf="@+id/edtHpVendor"
+                    app:layout_constraintTop_toBottomOf="@+id/edtHpVendor" />
+
+                <EditText
+                    android:id="@+id/edtNamaVendor"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:ems="10"
+                    android:hint="Nama Vendor"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="@+id/view10"
+                    app:layout_constraintStart_toEndOf="@+id/textView70"
+                    app:layout_constraintTop_toBottomOf="@+id/view10" />
+
+                <EditText
+                    android:id="@+id/edtAlamatSupplier"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:ems="10"
+                    android:hint="Alamat"
+                    android:inputType="textPostalAddress"
+                    android:minHeight="48dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/edtEmailSupplier"
+                    app:layout_constraintStart_toStartOf="@+id/edtEmailSupplier"
+                    app:layout_constraintTop_toBottomOf="@+id/edtEmailSupplier"
+                    app:layout_constraintVertical_bias="1.0" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="#FFFFFF"
+                android:elevation="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout15">
+
+                <EditText
+                    android:id="@+id/edNoPIC"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:ems="10"
+                    android:hint="Nomor Telepon"
+                    android:inputType="phone"
+                    android:minHeight="48dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/ed_PIC"
+                    app:layout_constraintStart_toStartOf="@+id/ed_jabatanPIC"
+                    app:layout_constraintTop_toBottomOf="@+id/ed_jabatanPIC" />
+
+                <TextView
+                    android:id="@+id/textView85"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/amiko"
+                    android:text="Nama"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    android:typeface="sans"
+                    app:layout_constraintBottom_toBottomOf="@+id/ed_PIC"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ed_PIC" />
+
+                <TextView
+                    android:id="@+id/textView86"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/amiko"
+                    android:text="Jabatan"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    android:typeface="sans"
+                    app:layout_constraintBottom_toBottomOf="@+id/ed_jabatanPIC"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ed_jabatanPIC" />
+
+                <TextView
+                    android:id="@+id/textView87"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/amiko"
+                    android:text="No.Telp"
+                    android:textAlignment="viewStart"
+                    android:textColor="#000000"
+                    android:textSize="12sp"
+                    android:typeface="sans"
+                    app:layout_constraintBottom_toBottomOf="@+id/edNoPIC"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/edNoPIC" />
+
+                <EditText
+                    android:id="@+id/ed_PIC"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="16dp"
+                    android:ems="10"
+                    android:hint="Nama"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="@+id/view15"
+                    app:layout_constraintStart_toEndOf="@+id/textView85"
+                    app:layout_constraintTop_toBottomOf="@+id/view15" />
+
+                <EditText
+                    android:id="@+id/ed_jabatanPIC"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:ems="10"
+                    android:hint="Jabatan"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp"
+                    app:layout_constraintEnd_toEndOf="@+id/view15"
+                    app:layout_constraintStart_toStartOf="@+id/ed_PIC"
+                    app:layout_constraintTop_toBottomOf="@+id/ed_PIC" />
+
+                <View
+                    android:id="@+id/view15"
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="#3A3A3A"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textView83" />
+
+                <TextView
+                    android:id="@+id/textView83"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Data Pemilik/PIC/Sales Person Vendor"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_hapus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView3">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageView15"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView38"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_delete_forever_24" />
+
+            <TextView
+                android:id="@+id/textView38"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/amiko_bold"
+                android:gravity="center"
+                android:text="Hapus Supplier"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView15"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView15"
+                app:layout_constraintTop_toTopOf="@+id/imageView15" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

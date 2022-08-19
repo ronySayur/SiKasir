@@ -10,13 +10,14 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.project.sikasir.R
+import com.project.sikasir.penjualan.pembayaran.classDetailPenjualan
+import com.project.sikasir.penjualan.pembayaran.classPenjualan
 import com.project.sikasir.produk.produk.classProduk
-import com.project.sikasir.transaksi.pembayaran.classDetailTransaksi
-import com.project.sikasir.transaksi.pembayaran.classTransaksi
 import kotlinx.android.synthetic.main.laporan_produk.*
 
 class laporanProduk : AppCompatActivity() {
     val classLapProduk = ArrayList<classLapProduk>()
+    val clasProduk = ArrayList<classProduk>()
     private lateinit var ssTransaksi: DataSnapshot
     private lateinit var ssDetail: DataSnapshot
     private lateinit var ssProduk: DataSnapshot
@@ -56,7 +57,7 @@ class laporanProduk : AppCompatActivity() {
         rv_riwayat.layoutManager = GridLayoutManager(this, 1)
         rv_riwayat.setHasFixedSize(true)
 
-        val refTransaksi = FirebaseDatabase.getInstance().getReference("Transaksi").orderByValue()
+        val refTransaksi = FirebaseDatabase.getInstance().getReference("Penjualan").orderByValue()
         val refDetail = FirebaseDatabase.getInstance().getReference("DetailTransaksi")
         val refProduk = FirebaseDatabase.getInstance().getReference("Produk")
 
@@ -98,14 +99,14 @@ class laporanProduk : AppCompatActivity() {
             //jika awal dan akhir kosong
             if (awal == -1L && akhir == -1L) {
                 for (snapDetail in ssDetail.children) {
-                    val cd = snapDetail.getValue(classDetailTransaksi::class.java)
+                    val cd = snapDetail.getValue(classDetailPenjualan::class.java)
                     jumlahProduk += cd?.jumlah_Produk?.toInt()!!
                 }
             } else {
                 for (snapDetail in ssDetail.children) {
                     for (snapTransaksi in ssTransaksi.children) {
-                        val t = snapTransaksi.getValue(classTransaksi::class.java)
-                        val cd = snapDetail.getValue(classDetailTransaksi::class.java)
+                        val t = snapTransaksi.getValue(classPenjualan::class.java)
+                        val cd = snapDetail.getValue(classDetailPenjualan::class.java)
                         //jika tanggal lebih dari sama dengan awal dan tanggal kurang dari sama dengan akhir
                         if (t?.tanggal!! >= awal && t.tanggal!! <= akhir) {
                             jumlahProduk += cd?.jumlah_Produk?.toInt()!!
@@ -123,15 +124,16 @@ class laporanProduk : AppCompatActivity() {
             //RV
             for (snapProduk in ssProduk.children) {
                 val p = snapProduk.getValue(classProduk::class.java)
-                val lp = classLapProduk(p?.nama_Produk, p?.harga_Jual, p?.stok)
+                clasProduk.add(p!!)
+                val lp = classLapProduk(p.nama_Produk, p.harga_Jual, p.stok)
 
                 //jika awal dan akhir kosong
                 if (awal == -1L && akhir == -1L) {
                     for (snapTransaksi in ssDetail.children) {
-                        val cd = snapTransaksi.getValue(classDetailTransaksi::class.java)
+                        val cd = snapTransaksi.getValue(classDetailPenjualan::class.java)
 
                         //jika classTransaksi.emailpegawai = classPegawai.emailPegawai
-                        if (cd?.nama_Produk.equals(p?.nama_Produk)) {
+                        if (cd?.nama_Produk.equals(p.nama_Produk)) {
                             //terjual
                             lp.terjual = cd?.jumlah_Produk?.replace(",00", "")?.filter { it.isDigit() }?.let {
                                 lp.terjual?.plus(it.toInt())
@@ -141,11 +143,11 @@ class laporanProduk : AppCompatActivity() {
                 } else {
                     for (snapDetail in ssDetail.children) {
                         for (snapTransaksi in ssTransaksi.children) {
-                            val t = snapTransaksi.getValue(classTransaksi::class.java)
-                            val cd = snapDetail.getValue(classDetailTransaksi::class.java)
+                            val t = snapTransaksi.getValue(classPenjualan::class.java)
+                            val cd = snapDetail.getValue(classDetailPenjualan::class.java)
 
                             //transaksi.emailPegawai sama dengan pegawai.emailPegawai
-                            if (cd?.nama_Produk.equals(p?.nama_Produk) && t?.tanggal!! >= awal && t.tanggal!! <= akhir) {
+                            if (cd?.nama_Produk.equals(p.nama_Produk) && t?.tanggal!! >= awal && t.tanggal!! <= akhir) {
                                 //terjual
                                 lp.terjual = cd?.jumlah_Produk?.replace(",00", "")?.filter { it.isDigit() }?.let {
                                     lp.terjual?.plus(it.toInt())
@@ -156,7 +158,7 @@ class laporanProduk : AppCompatActivity() {
                 }
                 classLapProduk.add(lp)
             }
-            rv_riwayat.adapter = adapterLaporanProduk(classLapProduk)
+            rv_riwayat.adapter = adapterLaporanProduk(classLapProduk, clasProduk)
         }
     }
 }

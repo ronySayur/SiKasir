@@ -11,13 +11,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:background="#FFFFFF"
         android:elevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/cl_pemb">
 
         <TextView
             android:id="@+id/textView50"
@@ -25,70 +26,46 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Keuntungan"
+            android:text="Laba/Rugi"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView54"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Keterangan"
-            android:textColor="#FF3D00"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/textView50"
-            app:layout_constraintTop_toBottomOf="@+id/textView50" />
-
-        <TextView
-            android:id="@+id/textView55"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="Jumlah"
-            android:textColor="#FF3D00"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView54" />
-
-        <TextView
             android:id="@+id/textView56"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="Total Penjualan"
             app:layout_constraintStart_toStartOf="@+id/textView50"
-            app:layout_constraintTop_toBottomOf="@+id/textView54" />
+            app:layout_constraintTop_toBottomOf="@+id/textView50" />
 
         <TextView
             android:id="@+id/textView57"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:text="Rp0"
-            app:layout_constraintEnd_toEndOf="@+id/textView55"
-            app:layout_constraintTop_toBottomOf="@+id/textView55" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView56" />
 
         <TextView
             android:id="@+id/textView58"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Harga Modal"
+            android:text="Total Pembelian"
             app:layout_constraintStart_toStartOf="@+id/textView50"
             app:layout_constraintTop_toBottomOf="@+id/textView56" />
 
         <TextView
-            android:id="@+id/textView59"
+            android:id="@+id/tv_total_pembelian"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Rp0"
-            app:layout_constraintEnd_toEndOf="@+id/textView55"
+            app:layout_constraintEnd_toEndOf="@+id/textView57"
             app:layout_constraintTop_toBottomOf="@+id/textView57" />
 
         <TextView
@@ -97,8 +74,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
-            android:text="Total Keuntungan"
-            android:textColor="#FF3D00"
+            android:text="Laba/Rugi"
+            android:textColor="#1DE9B6"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -111,11 +88,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Rp0"
-            android:textColor="#FF3D00"
+            android:textColor="#1DE9B6"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/textView59"
-            app:layout_constraintTop_toBottomOf="@+id/textView59" />
+            app:layout_constraintEnd_toEndOf="@+id/tv_total_pembelian"
+            app:layout_constraintTop_toBottomOf="@+id/tv_total_pembelian" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <EditText
@@ -134,8 +111,7 @@
         android:inputType="date"
         android:minHeight="48dp"
         android:paddingLeft="8dp"
-        android:text="date"
-        android:visibility="gone"
+        android:text="Tanggal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -147,7 +123,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/amiko_bold"
-        android:text="Rangkuman Laporan"
+        android:text="Ringkasan "
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textColor="#000000"
         android:textStyle="bold"
@@ -171,7 +147,74 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout3"
+        android:id="@+id/cl_pemb"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="#FFFFFF"
+        android:elevation="5dp"
+        app:layout_constraintEnd_toEndOf="@+id/cl_pen"
+        app:layout_constraintStart_toStartOf="@+id/cl_pen"
+        app:layout_constraintTop_toBottomOf="@+id/cl_pen">
+
+        <TextView
+            android:id="@+id/judul"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Pembelian"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/pembkot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Pembelian"
+            app:layout_constraintStart_toStartOf="@+id/judul"
+            app:layout_constraintTop_toBottomOf="@+id/judul" />
+
+        <TextView
+            android:id="@+id/tv_pembkot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Rp0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/pembkot" />
+
+        <TextView
+            android:id="@+id/totPemb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="Total Pembelian"
+            android:textColor="#FF3D00"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/judul"
+            app:layout_constraintTop_toBottomOf="@+id/pembkot" />
+
+        <TextView
+            android:id="@+id/tv_tot_pemb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rp0"
+            android:textColor="#FF3D00"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/tv_pembkot"
+            app:layout_constraintTop_toTopOf="@+id/totPemb" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_pen"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -196,46 +239,22 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView23"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Keterangan"
-            android:textColor="#FF3D00"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/textView21"
-            app:layout_constraintTop_toBottomOf="@+id/textView21" />
-
-        <TextView
-            android:id="@+id/textView24"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:text="Jumlah"
-            android:textColor="#FF3D00"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView23" />
-
-        <TextView
             android:id="@+id/textView26"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:text="Penjualan Kotor"
-            app:layout_constraintStart_toStartOf="@+id/textView23"
-            app:layout_constraintTop_toBottomOf="@+id/textView23" />
+            app:layout_constraintStart_toStartOf="@+id/textView21"
+            app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
         <TextView
             android:id="@+id/textView32"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
             android:text="Rp0"
-            app:layout_constraintEnd_toEndOf="@+id/textView24"
-            app:layout_constraintTop_toBottomOf="@+id/textView24" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView26" />
 
         <TextView
             android:id="@+id/textView36"
@@ -252,7 +271,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Rp0"
-            app:layout_constraintEnd_toEndOf="@+id/textView24"
+            app:layout_constraintEnd_toEndOf="@+id/textView32"
             app:layout_constraintTop_toBottomOf="@+id/textView32" />
 
         <TextView
@@ -262,7 +281,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:text="Total Penjualan"
-            android:textColor="#FF3D00"
+            android:textColor="#00B0FF"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -275,10 +294,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="Rp0"
-            android:textColor="#FF3D00"
+            android:textColor="#00B0FF"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/textView24"
+            app:layout_constraintEnd_toEndOf="@+id/tv_tp_diskon"
             app:layout_constraintTop_toBottomOf="@+id/tv_tp_diskon" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

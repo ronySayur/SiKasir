@@ -1,8 +1,12 @@
 package com.project.sikasir.laporan.pembelian
 
 data class classLapPembelian(
-    var namaProduk: String? = null,
-    var harga_Modal: String? = null,
-    var jumlah_Produk: Int? = 0,
-    var totalPembelian: Int? = 0
+    var nama_Vendor: String? = null,
+    var no_Vendor: String? = null,
+    var email_Vendor: String? = null,
+    var nama_PIC: String? = null,
+    var noPIC: String? = null,
+    var keterangan: String? = null,
+    var totalPembelian: Int? = 0,
+    var jumlahTransaksi: Int? = 0
 )

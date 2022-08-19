@@ -17,7 +17,7 @@ class aboutMe : AppCompatActivity() {
         setContentView(R.layout.about)
 
         tv_nama.setOnClickListener {
-            val refTransaksi = FirebaseDatabase.getInstance().getReference("Transaksi").orderByValue()
+            val refTransaksi = FirebaseDatabase.getInstance().getReference("Penjualan").orderByValue()
             refTransaksi.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(snapshotPegawai: DataSnapshot) {
                     if (snapshotPegawai.exists()) {

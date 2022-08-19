@@ -11,7 +11,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.project.sikasir.R
 import com.project.sikasir.listview.classPegawai
-import com.project.sikasir.transaksi.pembayaran.classTransaksi
+import com.project.sikasir.penjualan.pembayaran.classPenjualan
 import kotlinx.android.synthetic.main.laporan_pegawai.*
 import kotlinx.android.synthetic.main.laporan_rangkuman.*
 import java.text.NumberFormat
@@ -20,7 +20,6 @@ import java.util.*
 class laporanPegawai : AppCompatActivity() {
     val classLapPegawai = ArrayList<classLapPegawai>()
     val Rp = NumberFormat.getCurrencyInstance(Locale("in", "ID"))
-
     private lateinit var ssTransaksi: DataSnapshot
     private lateinit var ssPegawai: DataSnapshot
 
@@ -35,9 +34,7 @@ class laporanPegawai : AppCompatActivity() {
 
         getData()
 
-        editTextDate2.setOnClickListener {
-            tgl()
-        }
+        editTextDate2.setOnClickListener { tgl() }
     }
 
     private fun tgl() {
@@ -53,7 +50,6 @@ class laporanPegawai : AppCompatActivity() {
 
             editTextDate2.setText(datePicker.headerText)
             editTextDate2.isEnabled = true
-            //Toast.makeText(this, datePicker.headerText, Toast.LENGTH_LONG).show()
             initAdapter()
         }
 
@@ -70,10 +66,10 @@ class laporanPegawai : AppCompatActivity() {
         rv_peg.layoutManager = GridLayoutManager(this, 1)
         rv_peg.setHasFixedSize(true)
 
-        val refTransaksi = FirebaseDatabase.getInstance().getReference("Transaksi").orderByValue()
+        val refTransaksi = FirebaseDatabase.getInstance().getReference("Penjualan").orderByValue()
         val refPegawai = FirebaseDatabase.getInstance().getReference("Pegawai")
 
-        refPegawai.addValueEventListener(object : ValueEventListener {
+        refPegawai.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshotPegawai: DataSnapshot) {
                 if (snapshotPegawai.exists()) {
 
@@ -103,14 +99,14 @@ class laporanPegawai : AppCompatActivity() {
 
             if (awal == -1L && akhir == -1L) {
                 for (snapTransaksi in ssTransaksi.children) {
-                    val t = snapTransaksi.getValue(classTransaksi::class.java)
+                    val t = snapTransaksi.getValue(classPenjualan::class.java)
 
                     jumlahTransaksi += 1
                     totalTransaksi += t?.total?.replace(",00", "")?.filter { it.isDigit() }?.toInt()!!
                 }
             } else {
                 for (snapTransaksi in ssTransaksi.children) {
-                    val t = snapTransaksi.getValue(classTransaksi::class.java)
+                    val t = snapTransaksi.getValue(classPenjualan::class.java)
 
                     if (t?.tanggal!! >= awal && t.tanggal!! <= akhir) {
                         jumlahTransaksi += 1
@@ -118,9 +114,10 @@ class laporanPegawai : AppCompatActivity() {
                     }
                 }
             }
+
             val totalString = Rp.format(totalTransaksi)
             val total = totalString.substring(0, 2) + " " + totalString.substring(2, totalString.length)
-            tv_omset.text = total
+            tv_tot_pembelian.text = total
             tv_jmltransaksi.text = jumlahTransaksi.toString()
 
             for (snapPegawai in ssPegawai.children) {
@@ -129,7 +126,7 @@ class laporanPegawai : AppCompatActivity() {
 
                 if (awal == -1L && akhir == -1L) {
                     for (snapTransaksi in ssTransaksi.children) {
-                        val t = snapTransaksi.getValue(classTransaksi::class.java)
+                        val t = snapTransaksi.getValue(classPenjualan::class.java)
 
                         //jika orang sama tambah omset
                         if (t?.emailPegawai.equals(p?.Email_Pegawai)) {
@@ -139,7 +136,7 @@ class laporanPegawai : AppCompatActivity() {
                     }
                 } else {
                     for (snapTransaksi in ssTransaksi.children) {
-                        val t = snapTransaksi.getValue(classTransaksi::class.java)
+                        val t = snapTransaksi.getValue(classPenjualan::class.java)
                         if (t?.emailPegawai.equals(p?.Email_Pegawai) && t?.tanggal!! >= awal && t.tanggal!! <= akhir) {
                             lp.jumlahTransaksi = lp.jumlahTransaksi?.plus(1)
                             lp.omset =

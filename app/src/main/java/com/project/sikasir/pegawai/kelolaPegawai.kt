@@ -20,6 +20,7 @@ import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.project.sikasir.R
+import com.project.sikasir.toko.classToko
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.pegawai_kelola.*
 
@@ -27,7 +28,7 @@ import kotlinx.android.synthetic.main.pegawai_kelola.*
 class kelolaPegawai : AppCompatActivity() {
     //Firebase RealtimeDatabase
     private var akses = ""
-    private lateinit var reference: DatabaseReference
+    private lateinit var refPegawai: DatabaseReference
     private lateinit var storage: StorageReference
 
     private var PHOTO_MAX: Int = 1
@@ -40,6 +41,8 @@ class kelolaPegawai : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.pegawai_kelola)
+        getToko()
+
 
         //Set
         val tedit: String = intent.getStringExtra("Edit").toString()
@@ -61,12 +64,11 @@ class kelolaPegawai : AppCompatActivity() {
         val tNama_Pegawai: String = intent.getStringExtra("Nama_Pegawai").toString()
         val tNama_Jabatan: String = intent.getStringExtra("Nama_Jabatan").toString()
         val tEmail: String = intent.getStringExtra("Email").toString()
-        val tHak_Akses: String = intent.getStringExtra("Hak_Akses").toString()
         val tHP: String = intent.getStringExtra("HP").toString()
         val tFoto: String = intent.getStringExtra("Foto").toString()
         val tPin: String = intent.getStringExtra("Pin").toString()
 
-        tv_judul.text = "Edit Pegawai"
+        "Edit Pegawai".also { tv_judul.text = it }
         edNamaPegawai.setText(tNama_Pegawai)
         edNamaJabatan.setText(tNama_Jabatan)
         edemailpegawai.setText(tEmail)
@@ -102,10 +104,23 @@ class kelolaPegawai : AppCompatActivity() {
                                     edpin.error = "Pin Harus 6 digit angka"
                                 } else {
                                     if (edemailpegawai.text.toString().isValidEmail()) {
-                                        reference = FirebaseDatabase.getInstance().reference.child("Pegawai").child(edemailpegawai.text.toString().replace(".", ","))
+                                        refPegawai = FirebaseDatabase.getInstance().reference.child("Pegawai")
 
-                                        updateData(edNamaPegawai.text.toString(), edHp.text.toString(), akses, edNamaJabatan.text.toString(), edemailpegawai.text.toString(), edpin.text.toString())
-                                        uploadPhoto()
+                                        val user = mapOf<String, String>(
+                                            "Nama_Pegawai" to edNamaPegawai.text.toString(),
+                                            "HP" to edHp.text.toString(),
+                                            "Hak_Akses" to akses,
+                                            "nama_Toko" to spinToko.selectedItem.toString(),
+                                            "Nama_Jabatan" to edNamaJabatan.text.toString(),
+                                            "Email_Pegawai" to edemailpegawai.text.toString(),
+                                            "Pin" to edpin.text.toString()
+                                        )
+
+                                        refPegawai.child(edemailpegawai.text.toString().replace(".", ",")).updateChildren(user)
+
+                                        if (selectphoto_button_register.alpha == 0f) {
+                                            uploadPhoto()
+                                        }
 
                                         val gotoHomeIntent = Intent(this@kelolaPegawai, pegawai::class.java)
                                         startActivity(gotoHomeIntent)
@@ -124,7 +139,6 @@ class kelolaPegawai : AppCompatActivity() {
     }
 
     private fun tambahPegawai() {
-
         "Tambah Pegawai".also { tv_judul.text = it }
         cv_hapus.visibility = View.GONE
 
@@ -148,8 +162,8 @@ class kelolaPegawai : AppCompatActivity() {
                                     edpin.error = "Pin Harus 6 digit angka"
                                 } else {
                                     if (edemailpegawai.text.toString().isValidEmail()) {
-                                        reference = FirebaseDatabase.getInstance().reference.child("Pegawai").child(edemailpegawai.text.toString().replace(".", ","))
-                                        reference.addListenerForSingleValueEvent(object : ValueEventListener {
+                                        refPegawai = FirebaseDatabase.getInstance().reference.child("Pegawai").child(edemailpegawai.text.toString().replace(".", ","))
+                                        refPegawai.addListenerForSingleValueEvent(object : ValueEventListener {
                                             override fun onDataChange(dataSnapshot: DataSnapshot) {
                                                 if (dataSnapshot.exists()) {
                                                     val alert = AlertDialog.Builder(this@kelolaPegawai)
@@ -158,12 +172,15 @@ class kelolaPegawai : AppCompatActivity() {
                                                     alert.setPositiveButton("Ok", null)
                                                     alert.show()
                                                 } else {
-                                                    uploadPhoto()
+                                                    if (selectphoto_button_register.alpha == 0f) {
+                                                        uploadPhoto()
+                                                    }
 
                                                     dataSnapshot.ref.child("Email_Pegawai").setValue(edemailpegawai.text.toString())
                                                     dataSnapshot.ref.child("Nama_Pegawai").setValue(edNamaPegawai.text.toString())
                                                     dataSnapshot.ref.child("Pin").setValue(edpin.text.toString())
                                                     dataSnapshot.ref.child("Hak_Akses").setValue(akses)
+                                                    dataSnapshot.ref.child("nama_Toko").setValue(spinToko.selectedItem.toString())
                                                     dataSnapshot.ref.child("HP").setValue(edHp.text.toString())
                                                     dataSnapshot.ref.child("Nama_Jabatan").setValue(edNamaJabatan.text.toString())
 
@@ -188,6 +205,7 @@ class kelolaPegawai : AppCompatActivity() {
         })
     }
 
+
     private fun onClick() {
         tvA7toA6.setOnClickListener {
             startActivity(Intent(this@kelolaPegawai, pegawai::class.java))
@@ -211,7 +229,8 @@ class kelolaPegawai : AppCompatActivity() {
         builder.setMessage("Yakin Untuk Menghapus Data?")
             .setCancelable(false)
             .setPositiveButton("Ya") { dialog, id ->
-                deletePegawai()
+                refPegawai = FirebaseDatabase.getInstance().reference.child("Pegawai").child(edemailpegawai.text.toString().replace(".", ","))
+                refPegawai.removeValue()
                 startActivity(Intent(this@kelolaPegawai, pegawai::class.java))
                 finish()
             }
@@ -245,18 +264,16 @@ class kelolaPegawai : AppCompatActivity() {
 
         storage = FirebaseStorage.getInstance().reference.child("Photousers").child(edemailpegawai.text.toString())
 
-        if (photo_location != null) {
-            val mStorageReference: StorageReference = storage.child(System.currentTimeMillis().toString() + "." + getFileExtension(photo_location))
+        val mStorageReference: StorageReference = storage.child(System.currentTimeMillis().toString() + "." + getFileExtension(photo_location))
 
-            mStorageReference.putFile(photo_location)
-                .addOnFailureListener { Toast.makeText(this, "Failure Upload", Toast.LENGTH_SHORT).show() }
-                .addOnSuccessListener {
-                    mStorageReference.downloadUrl.addOnSuccessListener { uri ->
-                        reference.ref.child("Foto").setValue(uri.toString())
-                    }
+        mStorageReference.putFile(photo_location)
+            .addOnFailureListener { Toast.makeText(this, "Failure Upload", Toast.LENGTH_SHORT).show() }
+            .addOnSuccessListener {
+                mStorageReference.downloadUrl.addOnSuccessListener { uri ->
+                    refPegawai.ref.child("Foto").setValue(uri.toString())
+                }
 
-                }.addOnCompleteListener {}
-        }
+            }.addOnCompleteListener {}
     }
 
     private fun findPhoto() {
@@ -284,30 +301,34 @@ class kelolaPegawai : AppCompatActivity() {
         return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri))
     }
 
-    private fun updateData(Nama_Pegawai: String, HP: String, Hak_Akses: String, Nama_Jabatan: String, Email_Pegawai: String, Pin: String) {
-        reference = FirebaseDatabase.getInstance().getReference("Pegawai")
-
-        val user = mapOf<String, String>(
-            "Nama_Pegawai" to Nama_Pegawai,
-            "HP" to HP,
-            "Hak_Akses" to Hak_Akses,
-            "Nama_Jabatan" to Nama_Jabatan,
-            "Email_Pegawai" to Email_Pegawai,
-            "Pin" to Pin
-        )
-
-        reference.child(Email_Pegawai.replace(".", ",")).updateChildren(user)
-    }
-
-    private fun deletePegawai() {
-        reference = FirebaseDatabase.getInstance().reference.child("Pegawai").child(edemailpegawai.text.toString().replace(".", ","))
-        reference.removeValue()
-    }
-
     private fun String.isValidEmail() = Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
     private fun getUsernameLocal() {
         val sharedPreference: SharedPreferences = getSharedPreferences(USERNAME_KEY, Context.MODE_PRIVATE)
         username_key_new = sharedPreference.getString(username_key, "").toString()
     }
+
+    private fun getToko() {
+        val refToko = FirebaseDatabase.getInstance().getReference("Toko")
+        refToko.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapToko: DataSnapshot) {
+                val list = ArrayList<String>()
+                if (snapToko.exists()) {
+                    for (s in snapToko.children) {
+                        s.getValue(classToko::class.java)?.let {
+                            it.nama_Toko?.let { it1 ->
+                                list.add(it1)
+                            }
+                        }
+                    }
+                    spinToko.adapter = ArrayAdapter(this@kelolaPegawai, android.R.layout.simple_spinner_item, list)
+                } else {
+                    rv_spin.visibility = View.GONE
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {}
+        })
+    }
+
 }

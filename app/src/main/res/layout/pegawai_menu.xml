@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:elevation="3dp"
+        android:elevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -115,5 +115,12 @@
         app:layout_constraintEnd_toEndOf="@+id/iv_kosong"
         app:layout_constraintStart_toStartOf="@+id/iv_kosong"
         app:layout_constraintTop_toBottomOf="@+id/iv_kosong" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/g_kosong"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="iv_kosong,tv_kosong" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

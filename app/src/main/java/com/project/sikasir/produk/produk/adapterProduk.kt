@@ -32,14 +32,16 @@ class adapterProduk(private val listProduk: ArrayList<classProduk>) :
         holder.stok.text = Stok
 
         holder.itemView.setOnClickListener {
-            val namaProduk = listProduk[position].nama_Produk
-            val hJual = listProduk[position].harga_Jual
-            val kategori = listProduk[position].kategori
-            val hModal = listProduk[position].harga_Modal
-            val barcode = listProduk[position].barcode
-            val merek = listProduk[position].merek
-            val foto = listProduk[position].foto
-            val stok = listProduk[position].stok
+            val namaProduk = currentitem.nama_Produk
+            val hJual = currentitem.harga_Jual
+            val kategori = currentitem.kategori
+            val hModal = currentitem.harga_Modal
+            val barcode = currentitem.barcode
+            val merek = currentitem.merek
+            val foto = currentitem.foto
+            val stok = currentitem.stok
+            val id_Produk = currentitem.id_Produk
+            val id_Toko = currentitem.id_Toko
 
             val intent = Intent(holder.itemView.context, kelolaProduk::class.java)
             intent.putExtra("Nama_Produk", namaProduk)
@@ -50,6 +52,8 @@ class adapterProduk(private val listProduk: ArrayList<classProduk>) :
             intent.putExtra("Merek", merek)
             intent.putExtra("Foto", foto)
             intent.putExtra("Stok", stok)
+            intent.putExtra("id_Produk", id_Produk)
+            intent.putExtra("id_Toko", id_Toko)
             intent.putExtra("Edit", "true")
 
             holder.itemView.context.startActivity(intent)

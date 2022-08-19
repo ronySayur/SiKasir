@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EAEAEA"
-    tools:context=".produk.pembelian.kelolaPembelian">
+    tools:context=".pembelian.kelolaPembelian">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
@@ -34,8 +34,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:fontFamily="@font/amiko_bold"
             android:text="←"
             android:textAlignment="center"
@@ -63,10 +63,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="8dp"
         android:background="#FFFFFF"
         android:elevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
@@ -105,11 +106,11 @@
             android:id="@+id/constraintLayout12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/blue_round_thin"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ed_harga_kosong">
+            app:layout_constraintTop_toBottomOf="@+id/textView69">
 
             <Button
                 android:id="@+id/minus"
@@ -158,7 +159,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             android:fontFamily="@font/amiko"
             android:text="Harga Modal"
             android:textAlignment="viewStart"
@@ -166,21 +167,9 @@
             android:textStyle="bold"
             android:typeface="monospace"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView74" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_ubah_harga" />
 
-        <TextView
-            android:id="@+id/kp_tv_harga"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:fontFamily="@font/amiko"
-            android:text="Harga"
-            android:textSize="16sp"
-            android:typeface="monospace"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView69" />
-
-        <EditText
+        <com.cottacush.android.currencyedittext.CurrencyEditText
             android:id="@+id/ed_harga_kosong"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -226,13 +215,11 @@
             android:id="@+id/btn_simpan_pembelian"
             android:layout_width="0dp"
             android:layout_height="53dp"
-            android:layout_marginTop="20dp"
             android:layout_marginBottom="16dp"
             android:text="Simpan"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/kp_total"
-            app:layout_constraintStart_toStartOf="@+id/textView72"
-            app:layout_constraintTop_toBottomOf="@+id/textView66" />
+            app:layout_constraintStart_toStartOf="@+id/textView72" />
 
         <TextView
             android:id="@+id/textView74"
@@ -258,6 +245,7 @@
             android:gravity="start|top"
             android:hint="keterangan"
             android:inputType="textMultiLine"
+            android:minHeight="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/kp_total" />
 
@@ -277,8 +265,37 @@
             android:text="Ubah Harga"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/textView74"
-            app:layout_constraintEnd_toEndOf="@+id/kp_tv_harga"
+            app:layout_constraintEnd_toEndOf="@+id/ed_harga_kosong"
             app:layout_constraintTop_toTopOf="@+id/textView74" />
+
+        <TextView
+            android:id="@+id/textView92"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/amiko"
+            android:text="Sisa Stok"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:typeface="sans"
+            app:layout_constraintBottom_toTopOf="@+id/tv_sStok"
+            app:layout_constraintEnd_toStartOf="@+id/constraintLayout12"
+            app:layout_constraintStart_toEndOf="@+id/textView71"
+            app:layout_constraintTop_toTopOf="@+id/constraintLayout12"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/tv_sStok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/amiko"
+            android:text="0"
+            android:textSize="12sp"
+            android:typeface="sans"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout12"
+            app:layout_constraintEnd_toEndOf="@+id/textView92"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/textView92"
+            app:layout_constraintTop_toBottomOf="@+id/textView92" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

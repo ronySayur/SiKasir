@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#EAEAEA"
-    tools:context=".transaksi.keranjang.kelolaKeranjang">
+    tools:context=".penjualan.keranjang.kelolaKeranjang">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_diskon"
